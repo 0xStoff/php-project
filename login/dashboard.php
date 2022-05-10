@@ -41,12 +41,17 @@
     <div class="formWrapper">
         <form name="ProjectForm" class="form">
 
-            <input placeholder="Project Title" type="text" class="text textInput " id="ProjectName" name="ProjectName" required />
-            <input placeholder="Github URL" type="text" class="text textInput " id="ProjectUrl" required />
-            <textarea placeholder="Description" type="text" class="text textArea" id="ProjectDescription" required></textarea>
-            <!-- <input placeholder="Description" type="text" class="inputField" id="ProjectName" name="ProjectName" required /> -->
+            <input placeholder="Project Title" type="text" class="text textInput" id="ProjectName" name="ProjectName" required />
+            <textarea id="ProjectDescription" placeholder="Project Description" type="text" class="text textArea"></textarea>
+            <div class="inputWrapper">
+                <input id="ProjectUrl" type="url" name="url" id="url" placeholder="https://github.com/project-name" pattern="https://.*" size="30" class="text textUrl" required>
+                <input onfocus="!this.value ? this.style.color='rgba(255, 255, 255, 0.4)': this.style.color='#fff'" onblur="!this.value ? this.style.color='rgba(255, 255, 255, 0.4)': this.style.color='#fff'" id="ProjectDate" type="date" class="text textDate" required />
+            </div>
+            <input id="ProjectImage" class="text textImage" type="file" id="img" name="img" accept="image/*">
+
+
             <div class="select">
-                <div id="ripple" class="lds-ripple" style="position: absolute; top:70%; left:35%;">
+                <div id="ripple" class="lds-ripple">
                     <div></div>
                     <div></div>
                 </div>

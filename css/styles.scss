@@ -280,7 +280,19 @@ h3 {
 }
 
 // inputfelder
+
+.inputWrapper {
+  margin: 0 !important;
+  display: flex;
+  justify-content: space-between;
+}
+
+// input[type="date"]:invalid::-webkit-datetime-edit {
+//   color: rgba(255, 255, 255, 0.4);
+// }
+
 .text {
+  color-scheme: dark;
   width: 100%;
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.05);
@@ -289,6 +301,28 @@ h3 {
   color: white;
   padding: 25px 20px;
   box-sizing: border-box;
+
+  &[type="file" i]::-webkit-file-upload-button {
+    all: unset;
+    font-weight: bold;
+    margin-right: 30px;
+  }
+
+  &Image {
+    cursor: pointer;
+    height: auto;
+  }
+
+  &Area {
+    height: auto;
+  }
+  &Date {
+    color: rgba(255, 255, 255, 0.4);
+    width: 35%;
+  }
+  &Url {
+    width: 62%;
+  }
 
   &Input {
     height: 35px;

@@ -5,6 +5,7 @@ function renderCardsHtml(cards, languages) {
       (html += `
               <div class='card' id='card${i}'>
               <h1 class="card_title">${data.title}</h1>
+              <p class="card_title">${data.description}</p>
                  ${renderLanguages(data, languages)}
               </div>
               <div class='icon'>

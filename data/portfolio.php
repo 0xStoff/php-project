@@ -40,15 +40,21 @@ switch ($method) {
     // JSON umwandeln
     $data = json_decode(file_get_contents('php://input'), true);
 
+
     // Werte auslesen
-    $title = $data["name"];
+    $title = $data["title"];
     $languages = $data["languages"];
+    $creation_date = $data["creation_date"];
+    $description = $data["description"];
+    $url = $data["url"];
+    $picture_path = $data["picture_path"];
+
 
     // }
 
     // Daten speichern
-    $statement = $pdo->prepare("INSERT INTO portfolio.projects(title) VALUES (?)");
-    if ($statement->execute(array($title))) {
+    $statement = $pdo->prepare("INSERT INTO portfolio.projects(creation_date, description, title, url,picture_path) VALUES (?, ?, ?, ?,?)");
+    if ($statement->execute(array($creation_date, $description, $title, $url, $picture_path))) {
       // Erfolg: ID zurückgeben im location-Header
       $projects_id = $pdo->lastInsertId();
 
