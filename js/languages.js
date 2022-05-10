@@ -71,6 +71,7 @@ function resetLanguagesList(
       <option value="${language.language_name}" data-attribute=${language.language_id}>${language.language_name}</option>
           `)
   );
+
   if (wrapperElement) wrapperElement.innerHTML = html;
 }
 

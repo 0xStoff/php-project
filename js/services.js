@@ -70,6 +70,20 @@ async function speichereProject() {
   // Snackbar zeigen bei Fehler
   else {
     showSnackbar("Ungültige Eingabe.");
+
+    const inputs = document.getElementsByClassName("validity");
+    const select = document.getElementById("select");
+    const selected = document.getElementById("selectedItems");
+
+    selected.childElementCount == 0
+      ? (select.style.outline = "1px solid #ff8080")
+      : (select.style.outline = "none");
+
+    for (let i = 0; i < inputs.length; i++) {
+      !inputs[i].checkValidity()
+        ? (inputs[i].style.outline = "1px solid #ff8080")
+        : (inputs[i].style.outline = "none");
+    }
   }
 }
 

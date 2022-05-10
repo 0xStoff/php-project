@@ -41,13 +41,13 @@
     <div class="formWrapper">
         <form name="ProjectForm" class="form">
 
-            <input placeholder="Project Title" type="text" class="text textInput" id="ProjectName" name="ProjectName" required />
-            <textarea id="ProjectDescription" placeholder="Project Description" type="text" class="text textArea"></textarea>
+            <input placeholder="Project Title" type="text" class="text textInput validity blur" id="ProjectName" name="ProjectName" required />
+            <textarea id="ProjectDescription" placeholder="Project Description" type="text" class="text textArea validity blur" required></textarea>
             <div class="inputWrapper">
-                <input id="ProjectUrl" type="url" name="url" id="url" placeholder="https://github.com/project-name" pattern="https://.*" size="30" class="text textUrl" required>
-                <input onfocus="!this.value ? this.style.color='rgba(255, 255, 255, 0.4)': this.style.color='#fff'" onblur="!this.value ? this.style.color='rgba(255, 255, 255, 0.4)': this.style.color='#fff'" id="ProjectDate" type="date" class="text textDate" required />
+                <input id="ProjectUrl" type="url" name="url" id="url" placeholder="https://github.com/project-name" pattern="https://.*" size="30" class="text textUrl validity blur" required>
+                <input onfocus="!this.value ? this.style.color='rgba(255, 255, 255, 0.4)': this.style.color='#fff'" onblur="!this.value ? this.style.color='rgba(255, 255, 255, 0.4)': this.style.color='#fff'" id="ProjectDate" type="date" class="text textDate validity blur" required />
             </div>
-            <input id="ProjectImage" class="text textImage" type="file" id="img" name="img" accept="image/*">
+            <input id="ProjectImage" class="text textImage validity" type="file" id="img" name="img" accept="image/*" required>
 
 
             <div class="select">
@@ -55,7 +55,9 @@
                     <div></div>
                     <div></div>
                 </div>
-                <select id="select" class="selectField " multiple>
+
+
+                <select id="select" class="selectField" multiple required>
 
                 </select>
                 <div id="selectedItems" class="selectSelected">
