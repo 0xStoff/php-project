@@ -1,0 +1,421 @@
+* {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+@keyframes lds-ripple {
+  0% {
+    top: 36px;
+    left: 36px;
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+  4.9% {
+    top: 36px;
+    left: 36px;
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+  5% {
+    top: 36px;
+    left: 36px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    top: 0px;
+    left: 0px;
+    width: 72px;
+    height: 72px;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeInSnackbar {
+  from {
+    right: 0;
+    opacity: 0;
+  }
+  to {
+    right: 50px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOutSnackbar {
+  from {
+    right: 50px;
+    opacity: 1;
+  }
+  to {
+    right: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes modalIn {
+  0% {
+    transform: scale(0);
+    visibility: hidden;
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+@keyframes modalOut {
+  0% {
+    transform: scale(1);
+    visibility: visible;
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(120%);
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+html,
+body {
+  background-color: #121212;
+}
+
+h1,
+h3 {
+  color: #fff;
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  cursor: pointer;
+  height: auto;
+  margin-bottom: 5px;
+  overflow: hidden;
+  width: 600px;
+  padding: 2em;
+}
+
+.card:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  mix-blend-mode: lighten;
+  transition: opacity 0.5s ease-in-out;
+  outline: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.card:active {
+  background-color: rgba(255, 255, 255, 0.13);
+  mix-blend-mode: screen;
+  transition: opacity 0.5s ease-in-out;
+}
+
+@media (max-width: 768px) {
+  .card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+}
+
+.card_languages {
+  color: white;
+  width: 100%;
+}
+
+.card_title {
+  color: white;
+  width: 100%;
+}
+
+.wrapper {
+  animation: fadeIn 0.5s ease-in-out forwards;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  justify-content: center;
+  padding: 3em;
+}
+
+.wrapper :nth-child(n) {
+  margin-bottom: 30px;
+}
+
+#modal {
+  background-color: black;
+  border-radius: 10px;
+  width: 70%;
+  height: 80%;
+  outline: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: scroll;
+  position: fixed;
+  top: 70px;
+  z-index: 1;
+  transform: scale(0);
+}
+
+@media (max-width: 768px) {
+  #modal {
+    width: 100%;
+    height: 100%;
+    top: 0;
+  }
+}
+
+.fadeIn {
+  animation: modalIn 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+@media (max-width: 768px) {
+  .fadeIn {
+    animation: slideUp 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  }
+}
+
+.fadeOut {
+  animation: modalOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+}
+
+@media (max-width: 768px) {
+  .fadeOut {
+    animation: slideDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  }
+}
+
+#icon {
+  width: 30px;
+  cursor: pointer;
+  margin: 40px 0 15px 90%;
+}
+
+.lds-ripple {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+
+.lds-ripple div {
+  position: absolute;
+  border: 4px solid #fff;
+  opacity: 1;
+  border-radius: 50%;
+  animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
+.lds-ripple div:nth-child(2) {
+  animation-delay: -0.5s;
+}
+
+#iconList,
+.iconList {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  align-self: end;
+}
+
+.icon {
+  display: flex;
+  margin-bottom: 70px;
+}
+
+.iconDelete, .iconEdit {
+  width: 30px;
+  height: 30px;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.inputWrapper {
+  margin: 0 !important;
+  display: flex;
+  justify-content: space-between;
+}
+
+.text {
+  color-scheme: dark;
+  width: 100%;
+  height: 35px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: none;
+  outline: none;
+  color: white;
+  padding: 25px 20px;
+  box-sizing: border-box;
+}
+
+.text[type="file" i]::-webkit-file-upload-button {
+  all: unset;
+  font-weight: bold;
+  margin-right: 30px;
+}
+
+.textImage {
+  cursor: pointer;
+  height: auto;
+}
+
+.textArea {
+  height: auto;
+}
+
+.textDate {
+  color: rgba(255, 255, 255, 0.4);
+  width: 35%;
+}
+
+.textUrl {
+  width: 62%;
+}
+
+.text:focus {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.button {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  text-transform: uppercase;
+  padding: 15px;
+}
+
+.button:hover {
+  text-decoration: none;
+  color: white;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+#modalContent {
+  padding-left: 3em;
+  width: 80%;
+}
+
+#snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  background-color: #323232;
+  color: #ff8080;
+  text-align: center;
+  border-radius: 5px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  top: 30px;
+  right: 50px;
+  font-size: 17px;
+}
+
+#snackbar.show {
+  visibility: visible;
+  animation: fadeInSnackbar 0.5s, fadeOutSnackbar 0.5s 2.5s;
+}
+
+.loginWrapper {
+  animation: fadeIn 0.5s ease-in-out forwards;
+  width: 50%;
+  margin: 100px auto;
+}
+
+@media (max-width: 768px) {
+  .loginWrapper {
+    width: 75%;
+  }
+}
+
+.loginWrapper :nth-child(n) {
+  margin-bottom: 20px;
+}
+
+#loginButton,
+#registerButton {
+  cursor: pointer;
+  color: #187498;
+}
+
+.select {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.selectSelected, .selectField {
+  font: 1em sans-serif;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: none;
+  outline: none;
+  color: white;
+  padding: 20px;
+}
+
+.selectField {
+  width: 60%;
+  height: 200px;
+  box-sizing: border-box;
+  margin-right: 20px;
+}
+
+.selectField:focus {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.selectSelected {
+  width: 35%;
+  height: auto;
+}
+
+.formWrapper {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.form :nth-child(n) {
+  margin-bottom: 20px;
+}
+
+.listItem {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0 !important;
+}
+/*# sourceMappingURL=styles.css.map */
