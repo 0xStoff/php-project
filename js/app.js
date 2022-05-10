@@ -29,7 +29,6 @@ renderCards(projects, languagesByProject);
 // Event Listener für Einfügen neuer Karter
 addEvent("ButtonSpeichern", async () => {
   let prevProjects = projects;
-
   const { projects: loadedProjects } = await apiService.speichereProject();
   const languagesByProject = await apiService.getProjectLanguages();
   resetLanguagesList();

@@ -4,6 +4,9 @@ let { languages: allLanguages } = await apiService.ladeProject();
 
 // Element aus select Liste (links) entfernen und in die rechte Liste einfügen
 const addToList = (e, selectBox, selectedItems) => {
+  const select = document.getElementById("select");
+  select.style.outline = "none";
+
   // nicht ausführen wenn nur auf box (ohne value) geklickt wird; verhindert leere Zeilen
   // in rechter Liste
   if (e.target.value) {
@@ -22,6 +25,7 @@ const addToList = (e, selectBox, selectedItems) => {
 
 function createListElement(attribute, selectBox, selectedItems, value) {
   let listItem = document.createElement("div");
+
   // klasse für styling hinzufügen
   listItem.classList.add("listItem");
   // selektiertes Item als child hinzufügen
