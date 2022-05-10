@@ -8,10 +8,13 @@ export function addEvent(id, func) {
 // Modal ein- resp. ausblenden (mithilfe CSS Klassen)
 export function fadeModal(fade) {
   const modal = document.getElementById("modal");
+
   if (fade === "in") {
+    document.body.style.overflow = "hidden";
     modal.classList.add("fadeIn");
     modal.classList.replace("fadeOut", "fadeIn");
   } else {
+    document.body.style.overflow = "scroll";
     modal.classList.replace("fadeIn", "fadeOut");
 
     // Das Entfernen der Klassen nach der Animation verhindert ein Flickern

@@ -40,8 +40,12 @@ async function speichereProject() {
 
     // input als objekt speichern
     const data = {
-      name: document.getElementById("ProjectName").value,
+      creation_date: document.getElementById("ProjectDate").value,
+      description: document.getElementById("ProjectDescription").value,
       languages: languageIds,
+      title: document.getElementById("ProjectName").value,
+      url: document.getElementById("ProjectUrl").value,
+      picture_path: document.getElementById("ProjectImage").value,
     };
 
     const response = await fetch("../data/portfolio.php", {

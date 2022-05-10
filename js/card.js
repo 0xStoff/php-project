@@ -12,6 +12,7 @@ let { languages: allLanguages } = await apiService.ladeProject();
 
 // Klick auf Karte oder Edit Button verarbeiten
 function handleClick(cards, languages, i, id) {
+  //
   const { filterUnselected, selected } = filterProjects();
 
   // Konditionelles rendern von Text oder Inputs (für anzeige oder editieren)
@@ -21,7 +22,11 @@ function handleClick(cards, languages, i, id) {
   // wird der Funktion eine id übergeben (Platz im Backend), so sollen Inputs statt Text
   // angezeigt werden (Editiermodus)
   const html = !id
-    ? `<h1>${cards[i].title}</h1>  ${renderLanguages(cards[i], languages)}`
+    ? `<h1>${cards[i].title}</h1>  
+      <p class="card_title">${cards[i].description}</p>
+      <img src="${cards[i].picture_path}"/></br>
+      <a href="${cards[i].url}" class="card_title">${cards[i].url}</a> 
+      ${renderLanguages(cards[i], languages)}`
     : renderForm(cards[i].title);
 
   // DOM Element manipulieren, Modal ausblenden
@@ -63,6 +68,7 @@ function handleClick(cards, languages, i, id) {
     });
   }
 
+  // Algorithmen zur Filterung
   function filterProjects() {
     const selectedLanguages = languages.filter(
       (l) => l.projects_id == cards[i].projects_id
@@ -113,7 +119,16 @@ function renderCards(cards, languages) {
     );
   }
   // Event Listener für Close Icon im Modal
-  addEvent("icon", () => fadeModal("out"));
+  addEvent("icon", () => {
+    fadeModal("out");
+  });
+
+  // Event Listener für Keydown (um Modal mit ESC zu schliessen)
+  // prüft ob Escape betätigt wurde und führt fadeModal aus
+  document.addEventListener(
+    "keydown",
+    (event) => event.key === "Escape" && fadeModal("out")
+  );
 }
 
 export { renderCards };
