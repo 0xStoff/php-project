@@ -1,13 +1,13 @@
 // Click Event Listener hinzufügen, ID und Funktion als Parameter
 // um dauerndes wiederholen von document.getElement... und addEventListener zu vermeiden
-export function addEvent(id, func) {
+function addEvent(id, func) {
   const element = document.getElementById(id);
   if (element) element.addEventListener("click", func);
   return element;
 }
 
 // Modal ein- resp. ausblenden (mithilfe CSS Klassen)
-export function fadeModal(fade) {
+function fadeModal(fade) {
   const modal = document.getElementById("modal");
 
   if (fade === "in") {
@@ -26,3 +26,22 @@ export function fadeModal(fade) {
     }, 500);
   }
 }
+
+function inputValidation() {
+  // Validation von Inputfeldern on Blur
+  // speichere elemente mit klasse blur in variable
+  const formElements = document.getElementsByClassName("blur");
+
+  // loop durch alle form-elemente
+  for (let i = 0; i < formElements.length; i++) {
+    // event listener (on blur, beim verlassen des feldes) hinzufügen
+    formElements[i].addEventListener("blur", () =>
+      // validität checken und konditionelles styling (rote outline wenn invalid)
+      !formElements[i].checkValidity()
+        ? (formElements[i].style.outline = "1px solid #ff8080")
+        : (formElements[i].style.outline = "none")
+    );
+  }
+}
+
+export { addEvent, fadeModal, inputValidation };

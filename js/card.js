@@ -2,7 +2,7 @@
 import apiService from "../js/services.js";
 // funktion um ein click Event schneller zu deklarieren
 // modal ausblenden
-import { addEvent, fadeModal } from "../utils/utils.js";
+import { addEvent, fadeModal, inputValidation } from "../utils/utils.js";
 // funktionen für Liste (language list)
 import {
   addToList,
@@ -72,6 +72,8 @@ function handleClick(cards, languages, i, id) {
       renderCards(loadedProjects, languagesByProject);
     });
   }
+
+  inputValidation();
 
   // Algorithmen zur Filterung
   function filterProjects() {

@@ -3,7 +3,7 @@ import apiService from "../js/services.js";
 // funktion (logik) für das rendern der Cards (Projekte) importieren
 import { renderCards } from "./card.js";
 // funktion um ein click Event schneller zu deklarieren
-import { addEvent } from "../utils/utils.js";
+import { addEvent, inputValidation } from "../utils/utils.js";
 // funktionen für Liste (language list)
 import { addToList, resetLanguagesList } from "./languages.js";
 
@@ -54,17 +54,4 @@ addEvent("FormularZuruecksetzen", () => {
   resetLanguagesList();
 });
 
-// Validation von Inputfeldern on Blur
-// speichere elemente mit klasse blur in variable
-const formElements = document.getElementsByClassName("blur");
-
-// loop durch alle form-elemente
-for (let i = 0; i < formElements.length; i++) {
-  // event listener (on blur, beim verlassen des feldes) hinzufügen
-  formElements[i].addEventListener("blur", () =>
-    // validität checken und konditionelles styling (rote outline wenn invalid)
-    !formElements[i].checkValidity()
-      ? (formElements[i].style.outline = "1px solid #ff8080")
-      : (formElements[i].style.outline = "none")
-  );
-}
+inputValidation();

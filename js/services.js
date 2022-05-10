@@ -128,7 +128,7 @@ async function aktualisiereProject(id) {
       return ladeProject();
     } else {
       // Snackbar zeigen bei Fehler
-      showSnackbar("Speichern fehlgeschlagen, keine Änderung.");
+      showSnackbar("Speichern fehlgeschlagen.");
     }
   } else {
     // Snackbar zeigen bei Fehler

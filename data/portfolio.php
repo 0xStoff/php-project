@@ -101,14 +101,17 @@ switch ($method) {
         $title = $data["name"];
         $projects_id = $data['projects_id'];
         $languages = $data["languages"];
-
+        $description = $data["description"];
+        $creation_date = $data["creation_date"];
+        $url = $data["url"];
+        $picture_path = $data["picture_path"];
         // Daten speichern
-        $statement = $pdo->prepare("UPDATE portfolio.projects SET title=? WHERE projects_id=$projects_id");
+        $statement = $pdo->prepare("UPDATE portfolio.projects SET title=?, description=?,creation_date=?,url=?,picture_path=? WHERE projects_id=$projects_id");
 
         // Relationen zu Languages löschen
         $stat = $pdo->prepare("DELETE FROM portfolio.projects_languages_relation WHERE projects_id = $projects_id");
         $stat->execute();
-        if ($statement->execute(array($title))) {
+        if ($statement->execute(array($title, $description, $creation_date, $url, $picture_path))) {
 
             // Header passend setzen
             if ($statement->rowCount() > 0 || $stat->rowCount() > 0) {
