@@ -49,6 +49,7 @@
             </div>
             <input id="ProjectImage" class="text textImage" type="file" id="img" name="img" accept="image/*">
 
+
             <div class="select">
                 <div id="ripple" class="lds-ripple">
                     <div></div>
@@ -62,7 +63,7 @@
                 </div>
             </div>
 
-            <button class="button" type="button" onclick="document.forms.ProjectForm.reset()" id="FormularZuruecksetzen">Abbrechen</button>
+            <button class="button" type="button" id="FormularZuruecksetzen">Abbrechen</button>
             <button class="button" type="button" id="ButtonSpeichern">Einfügen</button>
         </form>
     </div>

@@ -3,6 +3,7 @@
 export function addEvent(id, func) {
   const element = document.getElementById(id);
   if (element) element.addEventListener("click", func);
+  return element;
 }
 
 // Modal ein- resp. ausblenden (mithilfe CSS Klassen)

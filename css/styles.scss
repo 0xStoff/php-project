@@ -14,6 +14,7 @@
     height: 0;
     opacity: 0;
   }
+
   4.9% {
     top: 36px;
     left: 36px;
@@ -21,6 +22,7 @@
     height: 0;
     opacity: 0;
   }
+
   5% {
     top: 36px;
     left: 36px;
@@ -28,6 +30,7 @@
     height: 0;
     opacity: 1;
   }
+
   100% {
     top: 0px;
     left: 0px;
@@ -36,11 +39,13 @@
     opacity: 0;
   }
 }
+
 @keyframes fadeInSnackbar {
   from {
     right: 0;
     opacity: 0;
   }
+
   to {
     right: 50px;
     opacity: 1;
@@ -52,6 +57,7 @@
     right: 50px;
     opacity: 1;
   }
+
   to {
     right: 0;
     opacity: 0;
@@ -62,6 +68,7 @@
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
   }
@@ -73,6 +80,7 @@
     visibility: hidden;
     opacity: 0;
   }
+
   100% {
     transform: scale(1);
     visibility: visible;
@@ -86,6 +94,7 @@
     visibility: visible;
     opacity: 1;
   }
+
   100% {
     transform: scale(0);
     visibility: hidden;
@@ -97,6 +106,7 @@
   0% {
     transform: translateY(0%);
   }
+
   100% {
     transform: translateY(120%);
   }
@@ -106,6 +116,7 @@
   0% {
     transform: translateY(100%);
   }
+
   100% {
     transform: translateY(0%);
   }
@@ -212,6 +223,7 @@ h3 {
 
 .fadeOut {
   animation: modalOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+
   @media (max-width: 768px) {
     animation: slideDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
   }
@@ -230,6 +242,7 @@ h3 {
   width: 80px;
   height: 80px;
 }
+
 .lds-ripple div {
   position: absolute;
   border: 4px solid #fff;
@@ -237,6 +250,7 @@ h3 {
   border-radius: 50%;
   animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
 }
+
 .lds-ripple div:nth-child(2) {
   animation-delay: -0.5s;
 }
@@ -254,6 +268,7 @@ h3 {
 .icon {
   display: flex;
   margin-bottom: 70px;
+
   // icons
   &Delete,
   &Edit {
@@ -279,7 +294,6 @@ h3 {
 .text {
   color-scheme: dark;
   width: 100%;
-  height: 35px;
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.05);
   border: none;
@@ -308,6 +322,14 @@ h3 {
   }
   &Url {
     width: 62%;
+  }
+
+  &Input {
+    height: 35px;
+  }
+
+  &Area  {
+    height: auto;
   }
 
   &:focus {
@@ -424,11 +446,13 @@ h3 {
       background-color: rgba(255, 255, 255, 0.1);
     }
   }
+
   &Selected {
     width: 35%;
     height: auto;
   }
 }
+
 .formWrapper {
   // align-items: center;
   // display: flex;
@@ -449,4 +473,5 @@ h3 {
   justify-content: space-between;
   width: 100%;
   margin: 0 !important;
+  background-color: blue;
 }
