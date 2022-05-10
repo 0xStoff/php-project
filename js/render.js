@@ -1,5 +1,9 @@
+// In diesem Modul ist wenig Logik, es wird vor allem HTML von den Funktionen zurückgegeben
+
+// HTML für Cards
 function renderCardsHtml(cards, languages) {
   let html = "";
+  // mappt durch alle Daten (cards) und gibt ein HTML-Element in Variable "html" zurück
   cards.map(
     (data, i) =>
       (html += `
@@ -22,6 +26,7 @@ function renderCardsHtml(cards, languages) {
   return html;
 }
 
+// form rendern, welche im Modal angezeigt wird
 const renderForm = (card) => `<div class="formWrapper">
  <form name="ModalForm" class="form">
    <input
@@ -85,9 +90,14 @@ const renderForm = (card) => `<div class="formWrapper">
  </form>
 </div>`;
 
-const renderLanguages = (cards, languages) => {
-  const filter = languages.filter((l) => l.projects_id === cards.projects_id);
+// Languages rendern
+const renderLanguages = (card, languages) => {
+  // da alle languages als Relation in der Variable enthalten sind,
+  // muss zuerst nach den gewünschten der Karte gefiltert werden
+  const filter = languages.filter((l) => l.projects_id === card.projects_id);
 
+  // html zurückgeben
+  // durch die languages muss nochmals gemappt werden, da es ein Array ist
   return `
     <h3 class="card_languages">
       ${filter.map((l) => " " + l.language_name)}
@@ -95,6 +105,7 @@ const renderLanguages = (cards, languages) => {
   `;
 };
 
+// rendern eines Modals
 const renderModal = (card, languages) => `<h1>${card.title}</h1>  
 <p class="card_title">vom ${card.creation_date}</p>
 <p class="card_title">${card.description}</p>
@@ -102,4 +113,4 @@ const renderModal = (card, languages) => `<h1>${card.title}</h1>
 <a href="${card.url}" class="card_title">${card.url}</a> 
 ${renderLanguages(card, languages)}`;
 
-export { renderCardsHtml, renderForm, renderLanguages, renderModal };
+export { renderCardsHtml, renderForm, renderModal };

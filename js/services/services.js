@@ -1,3 +1,5 @@
+import { showSnackbar, validiereInputs } from "../utils/validation.js";
+
 // Projekte (Karten) laden und response als JSON zurückgeben
 async function ladeProject() {
   const response = await fetch("../data/portfolio.php");
@@ -74,22 +76,6 @@ async function speichereProject() {
   }
 }
 
-function validiereInputs() {
-  const inputs = document.getElementsByClassName("validity");
-  const select = document.getElementById("select");
-  const selected = document.getElementById("selectedItems");
-
-  selected.childElementCount == 0
-    ? (select.style.outline = "1px solid #ff8080")
-    : (select.style.outline = "none");
-
-  for (let i = 0; i < inputs.length; i++) {
-    !inputs[i].checkValidity()
-      ? (inputs[i].style.outline = "1px solid #ff8080")
-      : (inputs[i].style.outline = "none");
-  }
-}
-
 // Projekt (Karte) aktualisieren
 async function aktualisiereProject(id) {
   // Form validieren
@@ -106,7 +92,6 @@ async function aktualisiereProject(id) {
       projects_id: id,
       name: document.getElementById("ProjectNameEdit").value,
       languages: languageIds,
-
       creation_date: document.getElementById("ProjectDateEdit").value,
       description: document.getElementById("ProjectDescriptionEdit").value,
       url: document.getElementById("ProjectUrlEdit").value,
@@ -137,7 +122,7 @@ async function aktualisiereProject(id) {
   }
 }
 
-async function getProjectLanguages() {
+async function getLanguageRelations() {
   const response = await fetch("../data/relation.php");
 
   if (response.ok) {
@@ -149,20 +134,9 @@ async function getProjectLanguages() {
   }
 }
 
-// Snackbar mit übergebenem Parameter (als String) anzeigen
-function showSnackbar(errorMessage) {
-  let snackbar = document.getElementById("snackbar");
-  snackbar.innerHTML = errorMessage;
-  snackbar.className = "show";
-  // 3s lang anzeigen, dann wieder ausblenden
-  setTimeout(function () {
-    snackbar.className = snackbar.className.replace("show", "");
-  }, 3000);
-}
-
 export default {
   aktualisiereProject,
-  getProjectLanguages,
+  getLanguageRelations,
   ladeProject,
   loescheProject,
   speichereProject,

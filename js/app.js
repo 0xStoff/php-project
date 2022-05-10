@@ -1,16 +1,17 @@
 // apiService importieren
-import apiService from "../js/services.js";
+import apiService from "./services/services.js";
 // funktion (logik) für das rendern der Cards (Projekte) importieren
 import { renderCards } from "./card.js";
 // funktion um ein click Event schneller zu deklarieren
-import { addEvent, inputValidation } from "../utils/utils.js";
+import { addEvent } from "./utils/utils.js";
 // funktionen für Liste (language list)
-import { addToList, resetLanguagesList } from "./languages.js";
+import { addToList, resetLanguagesList } from "./list.js";
+import { inputValidation } from "./utils/validation.js";
 
 // Main Programm, wird beim Laden der Website ausgeführt
 // lade projekte und alle languages vom endpoint
 let { projects } = await apiService.ladeProject();
-const languagesByProject = await apiService.getProjectLanguages();
+const languagesByProject = await apiService.getLanguageRelations();
 
 // Loader ausblenden
 const loader = document.getElementById("ripple");
@@ -37,7 +38,7 @@ addEvent("ButtonSpeichern", async () => {
   let prevProjects = projects;
   // neues Projekt speichern und languages neu abfragen
   const { projects: loadedProjects } = await apiService.speichereProject();
-  const languagesByProject = await apiService.getProjectLanguages();
+  const languagesByProject = await apiService.getLanguageRelations();
 
   // language list zurücksetzen und neue karten rendern
   resetLanguagesList();
@@ -54,4 +55,5 @@ addEvent("FormularZuruecksetzen", () => {
   resetLanguagesList();
 });
 
+// on blur validation zu inputs hinzfügen
 inputValidation();

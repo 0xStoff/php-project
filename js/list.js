@@ -1,5 +1,7 @@
-import apiService from "../js/services.js";
+// apiService importieren
+import apiService from "./services/services.js";
 
+// alle languages laden
 let { languages: allLanguages } = await apiService.ladeProject();
 
 // Element aus select Liste (links) entfernen und in die rechte Liste einfügen
@@ -23,9 +25,9 @@ const addToList = (e, selectBox, selectedItems) => {
   }
 };
 
+// List element mit Löschen Icon erstellen (wird rechts zur Liste angefügt)
 function createListElement(attribute, selectBox, selectedItems, value) {
   let listItem = document.createElement("div");
-
   // klasse für styling hinzufügen
   listItem.classList.add("listItem");
   // selektiertes Item als child hinzufügen
@@ -63,11 +65,16 @@ function createListElement(attribute, selectBox, selectedItems, value) {
   icon.removeEventListener("click", removeFromList);
 }
 
+// Language List zurücksetzen
+// Standardmässig werden alle Languages mit dem wrapper Element des select-tags (auf Startseite) übergeben
+// die Liste wird dabei auf den Anfangswert zurückgesetzt (links aller Inhalt, rechts kein Inhalt)
+// werden der funktion languages übergeben, werden dementsprechend andere optionen angezeigt (notwendig für Editiermodus)
+// da im Modal ein anderes Element wie auf der Startseite zu sehen ist, kann und muss auch der Wrapper übergeben werden
 function resetLanguagesList(
   languages = allLanguages,
   wrapperElement = document.getElementById("select")
 ) {
-  selectedItems.innerHTML = "";
+  // durch languages mappen und für jede language ein option element zurückgeben
   let html = "";
   languages.map(
     (language, i) =>
@@ -75,7 +82,7 @@ function resetLanguagesList(
       <option value="${language.language_name}" data-attribute=${language.language_id}>${language.language_name}</option>
           `)
   );
-
+  // html einfügen, falls ein wrapper element vorhanden ist
   if (wrapperElement) wrapperElement.innerHTML = html;
 }
 
