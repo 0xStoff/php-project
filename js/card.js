@@ -1,18 +1,29 @@
 // apiService importieren
 import apiService from "../js/services.js";
+// funktion um ein click Event schneller zu deklarieren
+// modal ausblenden
 import { addEvent, fadeModal } from "../utils/utils.js";
+// funktionen für Liste (language list)
 import {
   addToList,
   createListElement,
   resetLanguagesList,
 } from "./languages.js";
-import { renderCardsHtml, renderForm, renderLanguages } from "./render.js";
+// funktionen die sich auf das Rendern von HTML beziehen
+import {
+  renderCardsHtml,
+  renderForm,
+  renderLanguages,
+  renderModal,
+} from "./render.js";
 
+// alle languages laden und in alias speichern
 let { languages: allLanguages } = await apiService.ladeProject();
 
 // Klick auf Karte oder Edit Button verarbeiten
 function handleClick(cards, languages, i, id) {
-  //
+  // variabeln filterUnselected und selected aus funktion ziehen
+  // repräsentieren die gewählten/ungewählten Languages des geklickten Projekts
   const { filterUnselected, selected } = filterProjects();
 
   // Konditionelles rendern von Text oder Inputs (für anzeige oder editieren)
@@ -21,13 +32,7 @@ function handleClick(cards, languages, i, id) {
   // kann man mithilfe des index die richtige Karte rendern (cards[i]).
   // wird der Funktion eine id übergeben (Platz im Backend), so sollen Inputs statt Text
   // angezeigt werden (Editiermodus)
-  const html = !id
-    ? `<h1>${cards[i].title}</h1>  
-      <p class="card_title">${cards[i].description}</p>
-      <img src="${cards[i].picture_path}"/></br>
-      <a href="${cards[i].url}" class="card_title">${cards[i].url}</a> 
-      ${renderLanguages(cards[i], languages)}`
-    : renderForm(cards[i].title);
+  const html = !id ? renderModal(cards[i], languages) : renderForm(cards[i]);
 
   // DOM Element manipulieren, Modal ausblenden
   document.getElementById("modalContent").innerHTML = html;

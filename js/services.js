@@ -70,27 +70,30 @@ async function speichereProject() {
   // Snackbar zeigen bei Fehler
   else {
     showSnackbar("Ungültige Eingabe.");
+    validiereInputs();
+  }
+}
 
-    const inputs = document.getElementsByClassName("validity");
-    const select = document.getElementById("select");
-    const selected = document.getElementById("selectedItems");
+function validiereInputs() {
+  const inputs = document.getElementsByClassName("validity");
+  const select = document.getElementById("select");
+  const selected = document.getElementById("selectedItems");
 
-    selected.childElementCount == 0
-      ? (select.style.outline = "1px solid #ff8080")
-      : (select.style.outline = "none");
+  selected.childElementCount == 0
+    ? (select.style.outline = "1px solid #ff8080")
+    : (select.style.outline = "none");
 
-    for (let i = 0; i < inputs.length; i++) {
-      !inputs[i].checkValidity()
-        ? (inputs[i].style.outline = "1px solid #ff8080")
-        : (inputs[i].style.outline = "none");
-    }
+  for (let i = 0; i < inputs.length; i++) {
+    !inputs[i].checkValidity()
+      ? (inputs[i].style.outline = "1px solid #ff8080")
+      : (inputs[i].style.outline = "none");
   }
 }
 
 // Projekt (Karte) aktualisieren
 async function aktualisiereProject(id) {
   // Form validieren
-  if (document.forms.modalForm.checkValidity()) {
+  if (document.forms.ModalForm.checkValidity()) {
     const selectedItems = document.getElementsByClassName("listItem");
 
     let languageIds = [];
@@ -101,8 +104,13 @@ async function aktualisiereProject(id) {
     // input mit id (von DB) als objekt speichern
     const data = {
       projects_id: id,
-      name: document.getElementById("inputField").value,
+      name: document.getElementById("ProjectNameEdit").value,
       languages: languageIds,
+
+      creation_date: document.getElementById("ProjectDateEdit").value,
+      description: document.getElementById("ProjectDescriptionEdit").value,
+      url: document.getElementById("ProjectUrlEdit").value,
+      picture_path: document.getElementById("ProjectImageEdit").value,
     };
 
     const response = await fetch("../data/portfolio.php", {
@@ -125,6 +133,7 @@ async function aktualisiereProject(id) {
   } else {
     // Snackbar zeigen bei Fehler
     showSnackbar("Ungültige Eingabe.");
+    validiereInputs();
   }
 }
 
