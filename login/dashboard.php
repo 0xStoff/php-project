@@ -41,7 +41,10 @@
     <div class="formWrapper">
         <form name="ProjectForm" class="form">
 
-            <input placeholder="Project Title" type="text" class="inputField" id="ProjectName" name="ProjectName" required />
+            <input placeholder="Project Title" type="text" class="text textInput " id="ProjectName" name="ProjectName" required />
+            <input placeholder="Github URL" type="text" class="text textInput " id="ProjectUrl" required />
+            <textarea placeholder="Description" type="text" class="text textArea" id="ProjectDescription" required></textarea>
+            <!-- <input placeholder="Description" type="text" class="inputField" id="ProjectName" name="ProjectName" required /> -->
             <div class="select">
                 <div id="ripple" class="lds-ripple" style="position: absolute; top:70%; left:35%;">
                     <div></div>
@@ -55,7 +58,7 @@
                 </div>
             </div>
 
-            <button class="button" type="button" onclick="document.forms.ProjectForm.reset()" id="FormularZuruecksetzen">Abbrechen</button>
+            <button class="button" type="button" id="FormularZuruecksetzen">Abbrechen</button>
             <button class="button" type="button" id="ButtonSpeichern">Einfügen</button>
         </form>
     </div>
