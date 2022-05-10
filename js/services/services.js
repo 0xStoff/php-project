@@ -32,23 +32,9 @@ async function loescheProject(id) {
 // neues Projekt (Karte) speichern
 async function speichereProject() {
   // Form Validation
+
   if (document.forms.ProjectForm.checkValidity()) {
-    const selectedItems = document.getElementsByClassName("listItem");
-
-    let languageIds = [];
-    for (let i = 0; i < selectedItems.length; i++) {
-      languageIds = [...languageIds, selectedItems[i].dataset.attribute];
-    }
-
-    // input als objekt speichern
-    const data = {
-      creation_date: document.getElementById("ProjectDate").value,
-      description: document.getElementById("ProjectDescription").value,
-      languages: languageIds,
-      title: document.getElementById("ProjectName").value,
-      url: document.getElementById("ProjectUrl").value,
-      picture_path: document.getElementById("ProjectImage").value,
-    };
+    const data = getInpuData();
 
     const response = await fetch("../data/portfolio.php", {
       method: "POST",
@@ -80,23 +66,7 @@ async function speichereProject() {
 async function aktualisiereProject(id) {
   // Form validieren
   if (document.forms.ModalForm.checkValidity()) {
-    const selectedItems = document.getElementsByClassName("listItem");
-
-    let languageIds = [];
-    for (let i = 0; i < selectedItems.length; i++) {
-      languageIds = [...languageIds, selectedItems[i].dataset.attribute];
-    }
-
-    // input mit id (von DB) als objekt speichern
-    const data = {
-      projects_id: id,
-      name: document.getElementById("ProjectNameEdit").value,
-      languages: languageIds,
-      creation_date: document.getElementById("ProjectDateEdit").value,
-      description: document.getElementById("ProjectDescriptionEdit").value,
-      url: document.getElementById("ProjectUrlEdit").value,
-      picture_path: document.getElementById("ProjectImageEdit").value,
-    };
+    const data = getInpuData(id);
 
     const response = await fetch("../data/portfolio.php", {
       method: "PUT",
@@ -132,6 +102,35 @@ async function getLanguageRelations() {
   else {
     showSnackbar("Fehler beim Abrufen der Daten");
   }
+}
+
+function getInpuData(id) {
+  const selectedItems = document.getElementsByClassName("listItem");
+
+  let languageIds = [];
+  for (let i = 0; i < selectedItems.length; i++) {
+    languageIds = [...languageIds, selectedItems[i].dataset.attribute];
+  }
+
+  // input als objekt speichern
+  return !id
+    ? {
+        creation_date: document.getElementById(`ProjectDate`).value,
+        description: document.getElementById("ProjectDescription").value,
+        languages: languageIds,
+        picture_path: document.getElementById("ProjectImage").value,
+        title: document.getElementById("ProjectName").value,
+        url: document.getElementById("ProjectUrl").value,
+      }
+    : {
+        creation_date: document.getElementById("ProjectDateEdit").value,
+        description: document.getElementById("ProjectDescriptionEdit").value,
+        languages: languageIds,
+        title: document.getElementById("ProjectNameEdit").value,
+        picture_path: document.getElementById("ProjectImageEdit").value,
+        projects_id: id,
+        url: document.getElementById("ProjectUrlEdit").value,
+      };
 }
 
 export default {

@@ -98,7 +98,7 @@ switch ($method) {
         $data = json_decode(file_get_contents('php://input'), true);
 
         // Werte auslesen
-        $title = $data["name"];
+        $title = $data["title"];
         $projects_id = $data['projects_id'];
         $languages = $data["languages"];
         $description = $data["description"];
