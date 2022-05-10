@@ -38,3 +38,8 @@ addEvent("ButtonSpeichern", async () => {
   if (!loadedProjects) renderCards(projects, languagesByProject);
   projects = prevProjects;
 });
+
+addEvent("FormularZuruecksetzen", () => {
+  document.forms.ProjectForm.reset();
+  resetLanguagesList();
+});
