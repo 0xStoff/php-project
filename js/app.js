@@ -33,6 +33,7 @@ resetLanguagesList();
 renderCards(projects, languagesByProject);
 
 // Event Listener für Einfügen neuer Karter
+
 addEvent("ButtonSpeichern", async () => {
   // aktuellen Zustand der Projekte speichern
   let prevProjects = projects;

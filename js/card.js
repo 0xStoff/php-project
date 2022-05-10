@@ -26,67 +26,74 @@ function handleClick(cards, languages, i, id) {
   document.getElementById("modalContent").innerHTML = html;
 
   //  falls im Editiermodus
-  showEditMode(id, cards, languages, i);
+  if (id) showEditMode(id, cards, languages, i);
 }
 
 function showEditMode(id, cards, languages, i) {
-  if (id) {
-    // validation zu inputfeldern hinzufügen
-    inputValidation();
-    // variabeln filterUnselected und selected aus funktion ziehen
-    // repräsentieren die gewählten/ungewählten Languages des geklickten Projekts
-    const { filterUnselected, selected } = filterProjects(languages, cards[i]);
+  // validation zu inputfeldern hinzufügen
+  inputValidation();
+  // variabeln filterUnselected und selected aus funktion ziehen
+  // repräsentieren die gewählten/ungewählten Languages des geklickten Projekts
+  const { filterUnselected, selected } = filterProjects(languages, cards[i]);
 
-    // Listen für Languages in variabeln speichern
-    const selectBox = document.getElementById("select1");
-    const selectedItems = document.getElementById("selectedItems1");
+  // Listen für Languages in variabeln speichern
+  const selectBox = document.getElementById("select1");
+  const selectedItems = document.getElementById("selectedItems1");
 
-    // Language Liste mit Daten des Projekts abgleichen und anzeigen
-    resetLanguagesList(filterUnselected, selectBox);
+  // Language Liste mit Daten des Projekts abgleichen und anzeigen
+  resetLanguagesList(filterUnselected, selectBox);
 
-    // Event Listener zur Select Box hinzufügen (linke Liste)
-    selectBox.addEventListener("click", (e) =>
-      addToList(e, selectBox, selectedItems)
+  // Event Listener zur Select Box hinzufügen (linke Liste)
+  selectBox.addEventListener("click", (e) =>
+    addToList(e, selectBox, selectedItems)
+  );
+
+  // durch selektierte languages mappen (rechte Liste) und für jedes element ein Listelement zurückgeben (anzeige)
+  selected.map((l) => {
+    createListElement(l.language_id, selectBox, selectedItems, l.language_name);
+  });
+
+  // Event Listener zum Aktualisieren Button hinzufügen
+  addEvent("ButtonAktualisieren", async () => {
+    let prevCards = cards;
+    // apiService fürs aktualisieren aufrufen
+    const { projects: loadedProjects } = await apiService.aktualisiereProject(
+      id
     );
+    // languages vom apiService abrufen
+    const languagesByProject = await apiService.getLanguageRelations();
 
-    // durch selektierte languages mappen (rechte Liste) und für jedes element ein Listelement zurückgeben (anzeige)
-    selected.map((l) => {
-      createListElement(
-        l.language_id,
-        selectBox,
-        selectedItems,
-        l.language_name
-      );
-    });
-
-    // Event Listener zum Aktualisieren Button hinzufügen
-    addEvent("ButtonAktualisieren", async () => {
-      let prevCards = cards;
-      // apiService fürs aktualisieren aufrufen
-      const { projects: loadedProjects } = await apiService.aktualisiereProject(
-        id
-      );
-      // languages vom apiService abrufen
-      const languagesByProject = await apiService.getLanguageRelations();
-
-      // frontend ansicht zurücksetzen falls null von apiService zurückgegeben
-      if (!loadedProjects) loadedProjects = prevCards;
-      // Modal ausblenden
-      fadeModal("out");
-      // Karten neu rendern
-      renderCards(loadedProjects, languagesByProject);
-    });
-  }
+    // frontend ansicht zurücksetzen falls null von apiService zurückgegeben
+    if (!loadedProjects) loadedProjects = prevCards;
+    // Modal ausblenden
+    fadeModal("out");
+    // Karten neu rendern
+    renderCards(loadedProjects, languagesByProject);
+  });
 }
 
-// Karte löschen (zuerst im Frontend und dann im Backend)
+/**
+ * Karte resp. Projekt wird zuerst im Frontend und dann im Backend gelöscht
+ * @param {Array} cards zu löschende Karte
+ * @param {Array} languages Relationen zwischen Languages und Projekten
+ * @param {Int} i Zählervariable, repräsentiert Index der Karte im Memory
+ * @param {Int} id einzigartige ID, die das Projekt in der DB repräsentiert
+ *
+ */
 async function deleteCard(cards, languages, i, id) {
   cards.splice(i, 1);
   renderCards(cards, languages);
   await apiService.loescheProject(id);
 }
 
-// Rendern der Karten
+/**
+ * Rendern der Karten und hinzufügen von Event-Listener zu Icons (Click, Edit, Delete)
+ * weitere Event-Listener, um Modal bei Keydown (Escape-Taste) zu verlassen
+ *
+ * @param {Array} cards Zu rendernde Karten/Projekte
+ * @param {Array} languages Relationen zwischen Projekten und Languages
+ */
+
 function renderCards(cards, languages) {
   // HTML rendern und in variable speichern
   const html = renderCardsHtml(cards, languages);
@@ -105,17 +112,17 @@ function renderCards(cards, languages) {
       handleClick(cards, languages, i, e.target.dataset.attribute)
     );
   }
-  // Event Listener für Close Icon im Modal
-  addEvent("icon", () => {
-    fadeModal("out");
-  });
-
-  // Event Listener für Keydown (um Modal mit ESC zu schliessen)
-  // prüft ob Escape betätigt wurde und führt fadeModal aus
-  document.addEventListener(
-    "keydown",
-    (event) => event.key === "Escape" && fadeModal("out")
-  );
 }
+// Event Listener für Close Icon im Modal
+addEvent("icon", () => {
+  fadeModal("out");
+});
+
+// Event Listener für Keydown (um Modal mit ESC zu schliessen)
+// prüft ob Escape betätigt wurde und führt fadeModal aus
+document.addEventListener(
+  "keydown",
+  (event) => event.key === "Escape" && fadeModal("out")
+);
 
 export { renderCards };

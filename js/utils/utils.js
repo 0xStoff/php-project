@@ -1,8 +1,14 @@
 // apiService importieren
 import apiService from "../services/services.js";
 
-// Click Event Listener hinzufügen, ID und Funktion als Parameter
-// um dauerndes wiederholen von document.getElement... und addEventListener zu vermeiden
+/**
+ * Click Event Listener hinzufügen,
+ * um dauerndes wiederholen von document.getElement... und addEventListener zu vermeiden
+ *
+ * @param {String} id id des HTML-Elements
+ * @param {Function} func funktion die im click listener ausgeführt werden soll
+ * @returns gibt das HTML element zurück
+ */
 function addEvent(id, func) {
   const element = document.getElementById(id);
   if (element) element.addEventListener("click", func);
@@ -10,6 +16,7 @@ function addEvent(id, func) {
 }
 
 // Modal ein- resp. ausblenden (mithilfe CSS Klassen)
+
 function fadeModal(fade) {
   const modal = document.getElementById("modal");
 
@@ -33,7 +40,16 @@ function fadeModal(fade) {
 // alle languages laden und in alias speichern
 let { languages: allLanguages } = await apiService.ladeProject();
 
-// Algorithmen zur Filterung
+/**
+ * Algorithmen zur Filterung für die Language Liste
+ * Im Editiermodus sollen die Languages richtig in den Listen angezeigt werden
+ * Dazu müssen die selektierten resp. unselektierten Languages aus den Daten gelesen
+ * und zurückgegeben werden.
+ *
+ * @param {Array} languages Relationen zwischen Languages und Projekten
+ * @param {Array} card daten der ausgewählten Karte
+ * @returns gibt zwei Arrays zurück mit den selektierten resp. unselektierten Listeinträgen
+ */
 function filterProjects(languages, card) {
   // selektierte Languages des Projekts
   // gleicht die Relation zu Languages mit Projektdaten ab und filtert nach diesen

@@ -122,7 +122,6 @@ echo "<a href='/login/dashboard.php?logout=true' ><button class='button'>Logout<
 
 
     <script type="module" src="../js/app.js"></script>
-    <script type="module" src="../js/languages.js"></script>
 
 
 </body>
