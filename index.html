@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Github Projects</title>
+    <!-- <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/uikit@3.13.4/dist/css/uikit.min.css"
+    /> -->
+    <link href="./css/styles.css" rel="stylesheet" />
+    <style></style>
+  </head>
+  <body>
+    <div id="snackbar"></div>
+
+    <div class="loginWrapper">
+      <div id="Login" class="tab">
+        <form name="loginForm" action="./login/login.php" method="POST">
+          <div class="wrapper-form" id="ProjectEingabe">
+            <h1>Login</h1>
+            <input
+              type="text"
+              name="user"
+              placeholder="Username"
+              class="inputField"
+              required
+            />
+
+            <input
+              name="pass"
+              type="password"
+              placeholder="Passwort"
+              class="inputField"
+              required
+            />
+            <button class="button" onsubmit="document.loginForm.reset()">
+              Login
+            </button>
+            <div style="color: #fff">
+              Nicht registriert?
+              <a id="registerButton">Neuen Account erstellen</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="loginWrapper">
+      <div id="Register" class="tab" style="display: none">
+        <form name="loginForm" action="./login/register.php" method="POST">
+          <div class="wrapper-form">
+            <h1>Registrieren</h1>
+            <input
+              type="text"
+              name="user"
+              placeholder="Username"
+              class="inputField"
+              required
+            />
+
+            <input
+              name="pass"
+              type="password"
+              placeholder="Passwort"
+              class="inputField"
+              required
+            />
+            <button class="button" onsubmit="document.loginForm.reset()">
+              Registrieren
+            </button>
+            <div>
+              <a id="loginButton">Zurück zu Login</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <script type="module" src="js/tabs.js"></script>
+  </body>
+</html>

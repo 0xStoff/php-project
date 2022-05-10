@@ -1,0 +1,1 @@
+select * from users where username = 'carlo' and password = 'abc123'

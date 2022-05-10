@@ -1,0 +1,419 @@
+// font für alle elemente
+* {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+// verschiedene Keyframes animationen (fade, modal, slide)
+@keyframes lds-ripple {
+  0% {
+    top: 36px;
+    left: 36px;
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+  4.9% {
+    top: 36px;
+    left: 36px;
+    width: 0;
+    height: 0;
+    opacity: 0;
+  }
+  5% {
+    top: 36px;
+    left: 36px;
+    width: 0;
+    height: 0;
+    opacity: 1;
+  }
+  100% {
+    top: 0px;
+    left: 0px;
+    width: 72px;
+    height: 72px;
+    opacity: 0;
+  }
+}
+@keyframes fadeInSnackbar {
+  from {
+    right: 0;
+    opacity: 0;
+  }
+  to {
+    right: 50px;
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOutSnackbar {
+  from {
+    right: 50px;
+    opacity: 1;
+  }
+  to {
+    right: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes modalIn {
+  0% {
+    transform: scale(0);
+    visibility: hidden;
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+@keyframes modalOut {
+  0% {
+    transform: scale(1);
+    visibility: visible;
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0);
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+
+@keyframes slideDown {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(120%);
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+// farben
+html,
+body {
+  background-color: #121212;
+}
+
+h1,
+h3 {
+  color: #fff;
+}
+
+//  card komponente
+.card {
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  cursor: pointer;
+  // display: flex;
+  height: auto;
+
+  margin-bottom: 5px;
+  overflow: hidden;
+  width: 600px;
+
+  padding: 2em;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.08);
+    mix-blend-mode: lighten;
+    transition: opacity 0.5s ease-in-out;
+    outline: 1px solid rgba(255, 255, 255, 0.3);
+  }
+
+  &:active {
+    background-color: rgba(255, 255, 255, 0.13);
+    mix-blend-mode: screen;
+    transition: opacity 0.5s ease-in-out;
+  }
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  &_languages {
+    color: white;
+    width: 100%;
+  }
+
+  &_title {
+    color: white;
+    width: 100%;
+  }
+}
+
+// wrapper für card und modals
+.wrapper {
+  animation: fadeIn 0.5s ease-in-out forwards;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  justify-content: center;
+  padding: 3em;
+
+  :nth-child(n) {
+    margin-bottom: 30px;
+  }
+}
+
+// modal komponente
+#modal {
+  background-color: rgba(0, 0, 0, 1);
+  border-radius: 10px;
+  width: 70%;
+  height: 80%;
+  outline: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: scroll;
+  position: fixed;
+  top: 70px;
+  z-index: 1;
+  transform: scale(0);
+
+  @media (max-width: 768px) {
+    width: 100%;
+    height: 100%;
+    top: 0;
+  }
+}
+
+// fade klassen, werden bei klick auf button hinzugefügt resp. entfernt
+.fadeIn {
+  animation: modalIn 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+
+  @media (max-width: 768px) {
+    animation: slideUp 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  }
+}
+
+.fadeOut {
+  animation: modalOut 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  @media (max-width: 768px) {
+    animation: slideDown 0.5s cubic-bezier(0.165, 0.84, 0.44, 1) forwards;
+  }
+}
+
+// close icon modal
+#icon {
+  width: 30px;
+  cursor: pointer;
+  margin: 40px 0 15px 90%;
+}
+
+.lds-ripple {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-ripple div {
+  position: absolute;
+  border: 4px solid #fff;
+  opacity: 1;
+  border-radius: 50%;
+  animation: lds-ripple 1s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+.lds-ripple div:nth-child(2) {
+  animation-delay: -0.5s;
+}
+
+#iconList,
+.iconList {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  align-self: end;
+  // margin: 40px 0 15px 90%;
+}
+
+// wrapper für icons
+.icon {
+  display: flex;
+  margin-bottom: 70px;
+  // icons
+  &Delete,
+  &Edit {
+    width: 30px;
+    height: 30px;
+    margin: 0 5px;
+    cursor: pointer;
+  }
+}
+
+// inputfelder
+#inputField,
+.inputField {
+  width: 100%;
+  height: 35px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border: none;
+  outline: none;
+  color: white;
+  padding: 25px 20px;
+  box-sizing: border-box;
+
+  &:focus {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+// input {
+//   padding: 10px;
+//   // &::-webkit-input-placeholder {
+//   //   padding: 10px;
+//   // }
+// }
+
+// button
+.button {
+  background-color: rgba(255, 255, 255, 0.05);
+
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  text-transform: uppercase;
+  padding: 15px;
+
+  &:hover {
+    text-decoration: none;
+    color: white;
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+// wrapper für modal content
+#modalContent {
+  padding-left: 3em;
+  width: 80%;
+}
+
+// snackbar
+#snackbar {
+  visibility: hidden;
+  min-width: 250px;
+  background-color: rgb(50, 50, 50);
+  color: #ff8080;
+  text-align: center;
+  border-radius: 5px;
+  padding: 16px;
+  position: fixed;
+  z-index: 1;
+  top: 30px;
+  right: 50px;
+  font-size: 17px;
+}
+
+// zeige snackbar
+#snackbar.show {
+  visibility: visible;
+  animation: fadeInSnackbar 0.5s, fadeOutSnackbar 0.5s 2.5s;
+}
+
+// wrapper für login und register form
+.loginWrapper {
+  animation: fadeIn 0.5s ease-in-out forwards;
+  width: 50%;
+  margin: 100px auto;
+
+  @media (max-width: 768px) {
+    width: 75%;
+  }
+
+  :nth-child(n) {
+    margin-bottom: 20px;
+  }
+}
+
+// login und registerbutton (tab nav)
+#loginButton,
+#registerButton {
+  cursor: pointer;
+  color: #187498;
+}
+
+// input[type="text" i] {
+//   // padding: 1px 2px;
+//   padding: 10px;
+// }
+
+// select
+
+.select {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+
+  &Selected,
+  &Field {
+    font: 1em sans-serif;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: none;
+    outline: none;
+    color: white;
+    padding: 20px;
+  }
+
+  &Field {
+    width: 60%;
+    height: 200px;
+
+    box-sizing: border-box;
+    margin-right: 20px;
+
+    &:focus {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+  &Selected {
+    width: 35%;
+    height: auto;
+  }
+}
+.formWrapper {
+  // align-items: center;
+  // display: flex;
+  // justify-content: center;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.form {
+  :nth-child(n) {
+    margin-bottom: 20px;
+  }
+}
+
+.listItem {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0 !important;
+}
