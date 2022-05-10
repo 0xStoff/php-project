@@ -1,4 +1,9 @@
 // Snackbar mit übergebenem Parameter (als String) anzeigen
+/**
+ *  Blendet eine Snackbar mit übergebener Nachricht für 3 Sekunden lang ein
+ *
+ * @param {String} errorMessage Nachricht die in der Snackbar angezeigt werden soll
+ */
 function showSnackbar(errorMessage) {
   let snackbar = document.getElementById("snackbar");
   snackbar.innerHTML = errorMessage;
@@ -9,6 +14,9 @@ function showSnackbar(errorMessage) {
   }, 3000);
 }
 
+/**
+ * Führt eine Validation von allen Inputfeldern (inklusive Liste) durch
+ */
 function validiereInputs() {
   const inputs = document.getElementsByClassName("validity");
   const select = document.getElementById("select");
@@ -25,7 +33,9 @@ function validiereInputs() {
   }
 }
 
-// inputs on blur validieren
+/**
+ * Validiert die Inputs beim Blur-Event (beim verlassen des Inputs mit dem Cursor)
+ */
 function inputValidation() {
   // Validation von Inputfeldern on Blur
   // speichere elemente mit klasse blur in variable

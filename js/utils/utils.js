@@ -1,5 +1,7 @@
 // apiService importieren
 import apiService from "../services/services.js";
+// alle languages laden und in alias speichern
+let { languages: allLanguages } = await apiService.ladeProject();
 
 /**
  * Click Event Listener hinzufügen,
@@ -15,8 +17,11 @@ function addEvent(id, func) {
   return element;
 }
 
-// Modal ein- resp. ausblenden (mithilfe CSS Klassen)
-
+/**
+ * Modal mithilfe von CSS-Klassen ein- resp. ausblenden
+ *
+ * @param {String} fade gibt an, ob das Modal ein- bzw. ausgeblendet werden soll
+ */
 function fadeModal(fade) {
   const modal = document.getElementById("modal");
 
@@ -36,9 +41,6 @@ function fadeModal(fade) {
     }, 500);
   }
 }
-
-// alle languages laden und in alias speichern
-let { languages: allLanguages } = await apiService.ladeProject();
 
 /**
  * Algorithmen zur Filterung für die Language Liste

@@ -8,9 +8,17 @@ import { addToList, createListElement, resetLanguagesList } from "./list.js";
 // funktionen die sich auf das Rendern von HTML beziehen
 import { renderCardsHtml, renderForm, renderModal } from "./render.js";
 import { inputValidation } from "./utils/validation.js";
-
-// Klick auf Karte oder Edit Button verarbeiten
-function handleClick(cards, languages, i, id) {
+//XXXXXXXX
+/**
+ * Klick auf Karte oder Edit Button verarbeiten
+ * Modal dementsprechend anzeigen
+ *
+ * @param {Array} cards alle Karten resp. Projekte
+ * @param {Array} i Zählervariable, repräsentiert Index der Karte im Memory
+ * @param {Array} languages Relationen zwischen Languages und Projekten
+ * @param {Int} id einzigartige ID, die das Projekt in der DB repräsentiert
+ */
+function handleClick(cards, card, languages, id) {
   // Modal einblenden
   fadeModal("in");
 
@@ -20,21 +28,30 @@ function handleClick(cards, languages, i, id) {
   // kann man mithilfe des index die richtige Karte rendern (cards[i]).
   // wird der Funktion eine id übergeben (Platz im Backend), so sollen Inputs statt Text
   // angezeigt werden (Editiermodus)
-  const html = !id ? renderModal(cards[i], languages) : renderForm(cards[i]);
+  const html = !id ? renderModal(card, languages) : renderForm(card);
 
   // DOM Element manipulieren und Modal richtig anzeigen (Editiermodus oder Anzeigemodus)
   document.getElementById("modalContent").innerHTML = html;
 
   //  falls im Editiermodus
-  if (id) showEditMode(id, cards, languages, i);
+  if (id) showEditMode(id, cards, card, languages);
 }
 
-function showEditMode(id, cards, languages, i) {
+/**
+ * Editiermodus anzeigen
+ * Dementsprechend werden Inputs angezeigt, auch wird die Liste mit den
+ * Languages generiert und dynamisch angezeigt
+ *
+ * @param {Int} id  einzigartige ID, die das Projekt in der DB repräsentiert
+ * @param {*} card Karte resp. Projekt, dass im Editiermodus geöffnet werden soll
+ * @param {*} languages Relationen zwischen Languages und Projekten
+ */
+function showEditMode(id, cards, card, languages) {
   // validation zu inputfeldern hinzufügen
   inputValidation();
   // variabeln filterUnselected und selected aus funktion ziehen
   // repräsentieren die gewählten/ungewählten Languages des geklickten Projekts
-  const { filterUnselected, selected } = filterProjects(languages, cards[i]);
+  const { filterUnselected, selected } = filterProjects(languages, card);
 
   // Listen für Languages in variabeln speichern
   const selectBox = document.getElementById("select1");
@@ -74,15 +91,14 @@ function showEditMode(id, cards, languages, i) {
 
 /**
  * Karte resp. Projekt wird zuerst im Frontend und dann im Backend gelöscht
- * @param {Array} cards zu löschende Karte
+ * @param {Array} cards alle Karten resp. Projekte
  * @param {Array} languages Relationen zwischen Languages und Projekten
- * @param {Int} i Zählervariable, repräsentiert Index der Karte im Memory
  * @param {Int} id einzigartige ID, die das Projekt in der DB repräsentiert
  *
  */
-async function deleteCard(cards, languages, i, id) {
-  cards.splice(i, 1);
-  renderCards(cards, languages);
+async function deleteCard(cards, languages, id) {
+  const remainingCards = cards.filter((c) => c.projects_id != id);
+  renderCards(remainingCards, languages);
   await apiService.loescheProject(id);
 }
 
@@ -104,12 +120,12 @@ function renderCards(cards, languages) {
 
   // Event listener hinzufügen für Card Klick, editieren und löschen
   for (let i = 0; i < cards.length; i++) {
-    addEvent(`card${i}`, () => handleClick(cards, languages, i));
+    addEvent(`card${i}`, () => handleClick(cards[i], languages));
     addEvent(`delete${i}`, async (e) =>
-      deleteCard(cards, languages, i, e.target.dataset.attribute)
+      deleteCard(cards, languages, e.target.dataset.attribute)
     );
     addEvent(`edit${i}`, (e) =>
-      handleClick(cards, languages, i, e.target.dataset.attribute)
+      handleClick(cards, cards[i], languages, e.target.dataset.attribute)
     );
   }
 }
