@@ -97,7 +97,6 @@ function showEditMode(id, cards, card, languages) {
  *
  */
 async function deleteCard(cards, languages, id) {
-  console.log(cards);
   const remainingCards = cards.filter((c) => c.projects_id != id);
   renderCards(remainingCards, languages);
   await apiService.loescheProject(id);

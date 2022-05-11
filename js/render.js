@@ -115,7 +115,7 @@ const renderLanguages = (card, languages) => {
 const renderModal = (card, languages) => `<h1>${card.title}</h1>  
 <p class="card_title">vom ${card.creation_date}</p>
 <p class="card_title">${card.description}</p>
-<img src="/img/${card.picture_path}"/></br>
+<img class="card_image" src="/img/${card.picture_path}"/></br>
 <a href="${card.url}" class="card_title">${card.url}</a> 
 ${renderLanguages(card, languages)}`;
 

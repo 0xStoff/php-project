@@ -58,6 +58,3 @@ addEvent("FormularZuruecksetzen", () => {
 
 // on blur validation zu inputs hinzfügen
 inputValidation();
-
-let test = document.getElementById("ProjectImage").value;
-test = test.replace(`C:\\fakepath\\`, "img");

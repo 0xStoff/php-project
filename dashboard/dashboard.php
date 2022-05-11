@@ -34,11 +34,12 @@ if (!isset($_SESSION['userid'])) {
 }
 
 // logout button
-echo "<a href='/login/dashboard.php?logout=true' ><button class='button'>Logout</button></a></div>"
+echo "<a href='/dashboard/dashboard.php?logout=true' ><button class='button'>Logout</button></a></div>"
 ?>
+
    <div id="snackbar"></div>
     <div class="formWrapper">
-      <form name="ProjectForm" class="form">
+      <form name="ProjectForm" class="form" method="post" enctype="multipart/form-data">
         <input
           placeholder="Project Title"
           type="text"
@@ -75,14 +76,16 @@ echo "<a href='/login/dashboard.php?logout=true' ><button class='button'>Logout<
             required
           />
         </div>
+        <!-- id="img"
+        name="img" -->
         <input
           onblur="this.checkValidity() && (this.style.outline='none')"
           id="ProjectImage"
           class="text textImage validity"
           type="file"
-          id="img"
-          name="img"
           accept="image/*"
+           name="fileToUpload"
+           id="img"
           required
         />
 
@@ -99,7 +102,7 @@ echo "<a href='/login/dashboard.php?logout=true' ><button class='button'>Logout<
         <button class="button" type="button" id="FormularZuruecksetzen">
           Abbrechen
         </button>
-        <button class="button" type="button" id="ButtonSpeichern">
+        <button class="button"  id="ButtonSpeichern" type="button" >
           Einfügen
         </button>
       </form>

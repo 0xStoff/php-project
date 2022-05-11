@@ -114,13 +114,14 @@ function getInpuData(id) {
     languageIds = [...languageIds, selectedItems[i].dataset.attribute];
   }
 
-  // input als objekt speichern
   return !id
     ? {
         creation_date: document.getElementById(`ProjectDate`).value,
         description: document.getElementById("ProjectDescription").value,
         languages: languageIds,
-        picture_path: document.getElementById("ProjectImage").value,
+        picture_path: document
+          .getElementById("ProjectImage")
+          .value.replace("C:\\fakepath\\", ""),
         title: document.getElementById("ProjectName").value,
         url: document.getElementById("ProjectUrl").value,
       }
@@ -129,7 +130,9 @@ function getInpuData(id) {
         description: document.getElementById("ProjectDescriptionEdit").value,
         languages: languageIds,
         title: document.getElementById("ProjectNameEdit").value,
-        picture_path: document.getElementById("ProjectImageEdit").value,
+        picture_path: document
+          .getElementById("ProjectImageEdit")
+          .value.replace("C:\\fakepath\\", ""),
         projects_id: id,
         url: document.getElementById("ProjectUrlEdit").value,
       };

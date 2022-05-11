@@ -55,6 +55,7 @@ switch ($method) {
                 $statementLanguages = $pdo->prepare("INSERT INTO portfolio.projects_languages_relation VALUES ($projects_id,$languages[$i]);");
                 $statementLanguages->execute();
             }
+
             // Header setzen
             header("HTTP/1.0 201 Created");
         } else {
