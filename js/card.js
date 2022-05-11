@@ -22,7 +22,6 @@ import { inputValidation } from "./utils/validation.js";
 function handleClick(cards, card, languages, id) {
   // Modal einblenden
   fadeModal("in");
-
   // Konditionelles rendern von Text im Modal oder Inputs für Editieren
   // i wird im Listener des Event Handlers übergeben und repräsentiert
   // den Index in einem For Loop. Da die Karten chronologisch im Memory gepspeichert sind,

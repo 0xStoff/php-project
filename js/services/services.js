@@ -36,6 +36,8 @@ async function speichereProject() {
   if (document.forms.ProjectForm.checkValidity()) {
     const data = getInpuData();
 
+    console.log(data);
+
     const response = await fetch("../data/portfolio.php", {
       method: "POST",
       headers: {
