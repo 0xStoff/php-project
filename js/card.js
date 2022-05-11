@@ -8,6 +8,7 @@ import { addToList, createListElement, resetLanguagesList } from "./list.js";
 // funktionen die sich auf das Rendern von HTML beziehen
 import { renderCardsHtml, renderForm, renderModal } from "./render.js";
 import { inputValidation } from "./utils/validation.js";
+
 //XXXXXXXX
 /**
  * Klick auf Karte oder Edit Button verarbeiten
@@ -43,7 +44,7 @@ function handleClick(cards, card, languages, id) {
  * Languages generiert und dynamisch angezeigt
  *
  * @param {Int} id  einzigartige ID, die das Projekt in der DB repräsentiert
- * @param {*} card Karte resp. Projekt, dass im Editiermodus geöffnet werden soll
+ * @param {Object[]} card Karte resp. Projekt, dass im Editiermodus geöffnet werden soll
  * @param {*} languages Relationen zwischen Languages und Projekten
  */
 function showEditMode(id, cards, card, languages) {
@@ -91,12 +92,13 @@ function showEditMode(id, cards, card, languages) {
 
 /**
  * Karte resp. Projekt wird zuerst im Frontend und dann im Backend gelöscht
- * @param {Array} cards alle Karten resp. Projekte
+ * @param {Object[]} cards alle Karten resp. Projekte
  * @param {Array} languages Relationen zwischen Languages und Projekten
  * @param {Int} id einzigartige ID, die das Projekt in der DB repräsentiert
  *
  */
 async function deleteCard(cards, languages, id) {
+  console.log(cards);
   const remainingCards = cards.filter((c) => c.projects_id != id);
   renderCards(remainingCards, languages);
   await apiService.loescheProject(id);

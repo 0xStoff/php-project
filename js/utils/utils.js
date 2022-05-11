@@ -50,7 +50,7 @@ function fadeModal(fade) {
  *
  * @param {Array} languages Relationen zwischen Languages und Projekten
  * @param {Array} card daten der ausgewählten Karte
- * @returns {Array, Array} selektierte resp. unselektierten Listeinträgen
+ * @returns {Object} selektierte resp. unselektierten Listeinträgen
  */
 function filterProjects(languages, card) {
   // selektierte Languages des Projekts
@@ -81,7 +81,6 @@ function filterProjects(languages, card) {
       })
   );
 
-  console.log(filterUnselected, selected);
   // gibt die objekte von selektierten resp. unselektierten elementen zurück
   return { filterUnselected, selected };
 }

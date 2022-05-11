@@ -1,6 +1,12 @@
 import { addEvent } from "./utils/utils.js";
 
 // Tab wechseln (zwischen Login und Register)
+/**
+ * Tabs zwischen Login und Register wechseln.
+ * Die Funktion könnte um beliebig viele Tabs erweitert werden
+ *
+ * @param {String} tabName Der Name des Tabs (HTML ID), den es zu öffnen gilt
+ */
 function openTab(tabName) {
   // Alle Tabs in variable speichern
   let tabs = document.getElementsByClassName("tab");

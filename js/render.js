@@ -1,6 +1,12 @@
 // In diesem Modul ist wenig Logik, es wird vor allem HTML von den Funktionen zurückgegeben
 
 // HTML für Cards
+/**
+ *
+ * @param {*} cards
+ * @param {*} languages
+ * @returns
+ */
 function renderCardsHtml(cards, languages) {
   let html = "";
   // mappt durch alle Daten (cards) und gibt ein HTML-Element in Variable "html" zurück
