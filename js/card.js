@@ -60,15 +60,15 @@ function showEditMode(id, cards, card, languages) {
   // Language Liste mit Daten des Projekts abgleichen und anzeigen
   resetLanguagesList(filterUnselected, selectBox);
 
-  // Event Listener zur Select Box hinzufügen (linke Liste)
-  selectBox.addEventListener("click", (e) =>
-    addToList(e, selectBox, selectedItems)
-  );
-
   // durch selektierte languages mappen (rechte Liste) und für jedes element ein Listelement zurückgeben (anzeige)
   selected.map((l) => {
     createListElement(l.language_id, selectBox, selectedItems, l.language_name);
   });
+
+  // Event Listener zur Select Box hinzufügen (linke Liste)
+  selectBox.addEventListener("click", (e) =>
+    addToList(e, selectBox, selectedItems)
+  );
 
   // Event Listener zum Aktualisieren Button hinzufügen
   addEvent("ButtonAktualisieren", async () => {
@@ -120,7 +120,7 @@ function renderCards(cards, languages) {
 
   // Event listener hinzufügen für Card Klick, editieren und löschen
   for (let i = 0; i < cards.length; i++) {
-    addEvent(`card${i}`, () => handleClick(cards[i], languages));
+    addEvent(`card${i}`, () => handleClick(cards, cards[i], languages));
     addEvent(`delete${i}`, async (e) =>
       deleteCard(cards, languages, e.target.dataset.attribute)
     );

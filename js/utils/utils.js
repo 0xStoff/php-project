@@ -50,7 +50,7 @@ function fadeModal(fade) {
  *
  * @param {Array} languages Relationen zwischen Languages und Projekten
  * @param {Array} card daten der ausgewählten Karte
- * @returns gibt zwei Arrays zurück mit den selektierten resp. unselektierten Listeinträgen
+ * @returns {Array, Array} selektierte resp. unselektierten Listeinträgen
  */
 function filterProjects(languages, card) {
   // selektierte Languages des Projekts
@@ -68,19 +68,21 @@ function filterProjects(languages, card) {
   }));
 
   // unselektierte Languages des Projekts suchen
-  // zuerst filtern durch alle Languages
   const filterUnselected = allLanguages.filter(
     // language übergeben
     (language) =>
       // im selected array nach übereinstimmungen suchen (mittels find funktion)
-      selected.find(
-        (selected) =>
-          // abgleichen von allen Languages mit selektierten Languages des Projekts
-          // ungleiche zurückgeben, um in variable zu speichern
-          selected.language_id !== language.language_id &&
-          language.language_name !== selected.language_name
-      )
+      // invertieren
+      !selected.find((selected) => {
+        // abgleichen von allen Languages mit selektierten Languages des Projekts
+        // übereinstimmungen zurückgeben, um in variable zu speichern
+        selected.language_id === language.language_id &&
+          language.language_name === selected.language_name;
+      })
   );
+
+  console.log(filterUnselected, selected);
+  // gibt die objekte von selektierten resp. unselektierten elementen zurück
   return { filterUnselected, selected };
 }
 export { addEvent, fadeModal, filterProjects };
