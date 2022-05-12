@@ -66,9 +66,15 @@ async function speichereProject() {
 
 // Projekt (Karte) aktualisieren
 async function aktualisiereProject(id) {
+  const { projects } = await ladeProject();
   // Form validieren
   if (document.forms.ModalForm.checkValidity()) {
     const data = getInpuData(id);
+
+    const currentImage = projects.find(
+      (p) => p.projects_id === data.projects_id
+    );
+    if (!data.picture_path) data.picture_path = currentImage.picture_path;
 
     const response = await fetch("../data/portfolio.php", {
       method: "PUT",

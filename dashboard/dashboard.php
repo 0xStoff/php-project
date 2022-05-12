@@ -76,9 +76,7 @@ echo "<a href='?logout=true' ><button class='button'>Logout</button></a></div>"
             required
           />
         </div>
-        <!-- id="img"
-        name="img" -->
-        <!-- id="ProjectImage" -->
+
         <input
           onblur="this.checkValidity() && (this.style.outline='none')"
           class="text textImage validity"
@@ -107,53 +105,6 @@ echo "<a href='?logout=true' ><button class='button'>Logout</button></a></div>"
       </form>
     </div>
 
-    <!-- <div >
-  <input type="file" name="file" id="file">
-  <input type="button" id="btn_uploadfile"
-     value="Upload"
-     onclick="uploadFile();" >
-</div>
-
-<script>// Upload file
-async function uploadFile() {
-
-   var files = document.getElementById("file").files;
-
-   if(files.length > 0 ){
-
-      var formData = new FormData();
-      formData.append("file", files[0]);
-
-      const response = await fetch("../data/relation.php", {
-      method: "POST",
-      body: formData
-    });
-
-
-
-
-   }else{
-      alert("Please select a file");
-   }
-
-}</script> -->
-
-    <!-- <form action="upload.php" name="ProjectForm" class="form" method="post"
-    enctype="multipart/form-data">
-    <input
-          onblur="this.checkValidity() && (this.style.outline='none')"
-          id="ProjectImage"
-          class="text textImage validity"
-          type="file"
-          accept="image/*"
-           name="fileToUpload"
-          required
-        />
-
-    <button class="button"  type="submit" >
-      Test Img
-    </button>
-  </form> -->
     <div class="wrapper" id="wrapperCards">
       <div class="lds-ripple">
         <div></div>

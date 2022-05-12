@@ -46,12 +46,12 @@ function handleClick(cards, card, languages, id) {
  * @param {Object[]} card Karte resp. Projekt, dass im Editiermodus geöffnet werden soll
  * @param {*} languages Relationen zwischen Languages und Projekten
  */
-function showEditMode(id, cards, card, languages) {
+async function showEditMode(id, cards, card, languages) {
   // validation zu inputfeldern hinzufügen
   inputValidation();
   // variabeln filterUnselected und selected aus funktion ziehen
   // repräsentieren die gewählten/ungewählten Languages des geklickten Projekts
-  const { filterUnselected, selected } = filterProjects(languages, card);
+  const { filterUnselected, selected } = await filterProjects(languages, card);
 
   // Listen für Languages in variabeln speichern
   const selectBox = document.getElementById("select1");

@@ -54,7 +54,6 @@ async function filterProjects(languages, card) {
   // alle languages laden und in alias speichern
   let { languages: allLanguages } = await apiService.ladeProject();
 
-  console.log(card);
   // selektierte Languages des Projekts
   // gleicht die Relation zu Languages mit Projektdaten ab und filtert nach diesen
   // alle Languages des Projekts in variable speichern
@@ -69,21 +68,33 @@ async function filterProjects(languages, card) {
     language_name: l.language_name,
   }));
 
+  // console.log(
+  //   allLanguages.filter(
+  //     (language) =>
+  //       !selected.find((selected) => {
+  //         selected.language_id === language.language_id &&
+  //           language.language_name === selected.language_name;
+  //       })
+  //   )
+  // );
+
   // unselektierte Languages des Projekts suchen
   const filterUnselected = allLanguages.filter(
     // language übergeben
     (language) =>
       // im selected array nach übereinstimmungen suchen (mittels find funktion)
       // invertieren
-      !selected.find((selected) => {
-        // abgleichen von allen Languages mit selektierten Languages des Projekts
-        // übereinstimmungen zurückgeben, um in variable zu speichern
-        selected.language_id === language.language_id &&
-          language.language_name === selected.language_name;
-      })
+      !selected.find(
+        (selected) =>
+          // abgleichen von allen Languages mit selektierten Languages des Projekts
+          // übereinstimmungen zurückgeben, um in variable zu speichern
+          language.language_id === selected.language_id &&
+          language.language_name === selected.language_name
+      )
   );
 
   // gibt die objekte von selektierten resp. unselektierten elementen zurück
   return { filterUnselected, selected };
 }
+
 export { addEvent, fadeModal, filterProjects };

@@ -74,6 +74,7 @@ function resetLanguagesList(
   languages = allLanguages,
   wrapperElement = document.getElementById("select")
 ) {
+  // document.getElementById("selectedItems").innerHTML = "";
   // durch languages mappen und für jede language ein option element zurückgeben
   let html = "";
   languages.map(
