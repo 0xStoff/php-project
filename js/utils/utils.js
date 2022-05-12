@@ -1,7 +1,5 @@
 // apiService importieren
 import apiService from "../services/services.js";
-// alle languages laden und in alias speichern
-let { languages: allLanguages } = await apiService.ladeProject();
 
 /**
  * Click Event Listener hinzufügen,
@@ -52,7 +50,9 @@ function fadeModal(fade) {
  * @param {Array} card daten der ausgewählten Karte
  * @returns {Object} selektierte resp. unselektierten Listeinträgen
  */
-function filterProjects(languages, card) {
+async function filterProjects(languages, card) {
+  // alle languages laden und in alias speichern
+  let { languages: allLanguages } = await apiService.ladeProject();
   // selektierte Languages des Projekts
   // gleicht die Relation zu Languages mit Projektdaten ab und filtert nach diesen
   // alle Languages des Projekts in variable speichern

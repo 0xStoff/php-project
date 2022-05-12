@@ -53,6 +53,5 @@ $con->close();
 ?>
 </body>
 
-<script type="module" src="js/app.js"></script>
 
 </html>
