@@ -1,20 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Document</title>
-    <link href="../css/styles.css" rel="stylesheet" />
-</head>
-
-<body>
-    <?php
+<?php
 // DB-konfiguration laden (mysqli)
 include '../connection/connection.php';
 
+// Aufrufmethode auslesen
+$method = $_SERVER['REQUEST_METHOD'];
+
+// Aufrufe abhandeln
+// switch ($method) {
+
+//     case "POST":
+
+//         if (isset($_POST)) {
 // übergebenen Inhalt (von Post Methode) in Variabeln speichern
 $username = $_POST['user'];
 $password = $_POST['pass'];
@@ -39,19 +35,31 @@ if ($count === 1) {
     session_start();
     $_SESSION['userid'] = $username;
     // weiterleitung zum Dashboard
-    header("Location: ../../dashboard/dashboard.php?username=" . $username);
+    header("Location: ../dashboard/dashboard.php?username=" . $username);
 } else {
+    echo "Falsche Logindaten";
+//     header("Location: ../");
+
     // fehlermeldung da kein User mit entsprechender username/passwort kombination gefunden wurde
-    echo "
-                <h1> Falsche Logindaten, bitte versuche es erneut oder regstriere dich. </h1>
-                    <button onclick='history.back()' class='button'>Zurück</button>
-           ";
+    // echo "<script>
+    //     let snackbar = document.getElementById('snackbar');
+    //     snackbar.innerHTML = 'lsche Logindaten, bitte versuche es erneut oder regstriere dich. ';
+    //     snackbar.className = 'show';
+    //     setTimeout(function () {
+    //       snackbar.className = snackbar.className.replace('show', '');
+    //     }, 3000);
+
+    // </script>
+    // ";
 }
+// <h1> Falsche Logindaten, bitte versuche es erneut oder regstriere dich. </h1>
+//     <button onclick='history.back()' class='button'>Zurück</button>
 
 // datenbankverbindung schliessen
 $con->close();
-?>
-</body>
 
+//         }
 
-</html>
+// //
+//         break;
+// }

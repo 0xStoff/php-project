@@ -53,6 +53,8 @@ function fadeModal(fade) {
 async function filterProjects(languages, card) {
   // alle languages laden und in alias speichern
   let { languages: allLanguages } = await apiService.ladeProject();
+
+  console.log(card);
   // selektierte Languages des Projekts
   // gleicht die Relation zu Languages mit Projektdaten ab und filtert nach diesen
   // alle Languages des Projekts in variable speichern

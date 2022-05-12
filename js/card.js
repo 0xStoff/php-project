@@ -61,9 +61,15 @@ function showEditMode(id, cards, card, languages) {
   resetLanguagesList(filterUnselected, selectBox);
 
   // durch selektierte languages mappen (rechte Liste) und für jedes element ein Listelement zurückgeben (anzeige)
-  selected.map((l) => {
-    createListElement(l.language_id, selectBox, selectedItems, l.language_name);
-  });
+  if (selected)
+    selected.map((l) => {
+      createListElement(
+        l.language_id,
+        selectBox,
+        selectedItems,
+        l.language_name
+      );
+    });
 
   // Event Listener zur Select Box hinzufügen (linke Liste)
   selectBox.addEventListener("click", (e) =>

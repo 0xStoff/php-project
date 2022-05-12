@@ -34,7 +34,7 @@ if (!isset($_SESSION['userid'])) {
 }
 
 // logout button
-echo "<a href='/dashboard/dashboard.php?logout=true' ><button class='button'>Logout</button></a></div>"
+echo "<a href='?logout=true' ><button class='button'>Logout</button></a></div>"
 ?>
 
    <div id="snackbar"></div>

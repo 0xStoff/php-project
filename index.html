@@ -12,12 +12,18 @@
 
     <div class="loginWrapper">
       <div id="Login" class="tab">
-        <form name="loginForm" action="./login/login.php" method="POST">
-          <div class="wrapper-form" id="ProjectEingabe">
+        <div class="wrapper-form" id="ProjectEingabe">
+          <form
+            action="./login/login.php"
+            id="loginForm"
+            name="loginForm"
+            method="POST"
+          >
             <h1>Login</h1>
             <input
               type="text"
               name="user"
+              id="user"
               placeholder="Username"
               class="text textInput"
               required
@@ -25,20 +31,25 @@
 
             <input
               name="pass"
+              id="pass"
               type="password"
               placeholder="Passwort"
               class="text textInput"
               required
             />
-            <button class="button" onsubmit="document.loginForm.reset()">
+            <button
+              id="loginUser"
+              class="button"
+              onsubmit="document.loginForm.reset()"
+            >
               Login
             </button>
             <div style="color: #fff">
               Nicht registriert?
               <a id="registerButton">Neuen Account erstellen</a>
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
     <div class="loginWrapper">
@@ -71,6 +82,20 @@
         </form>
       </div>
     </div>
+    <script>
+      let myForm = document.getElementById("loginForm");
+      formData = new FormData(myForm);
+
+      async function login() {
+        const response = await fetch("./login/login.php", {
+          method: "POST",
+          body: formData,
+        });
+      }
+      document
+        .getElementById("loginUser")
+        .addEventListener("click", () => login());
+    </script>
 
     <script type="module" src="js/tabs.js"></script>
   </body>
