@@ -19,7 +19,7 @@ session_start();
 if (!isset($_SESSION['userid'])) {
     // ist keine Session Id vorhanden, wird der User zur Startseite weitergeleitet
     // so können nur User, die sich einloggen, das Dashboard sehen
-    header("Location: /");
+    header("Location: /php-project");
 } else {
     // ist eine gültige sesseion id vorhanden, wird der username und das dashboard angezeigt
     $userid = $_SESSION['userid'];
@@ -29,7 +29,7 @@ if (!isset($_SESSION['userid'])) {
     // nach logout wird die session wieder beendet, der User hat keinen zugriff mehr aufs dashboard
     if (isset($_GET['logout'])) {
         session_destroy();
-        header("Location: /");
+        header("Location: /php-project");
     }
 }
 

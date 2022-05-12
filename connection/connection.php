@@ -2,7 +2,7 @@
 // konfiguration für datenbank
 $host = "127.0.0.1";
 $user = "root";
-$password = 'abcd1234';
+$password = '';
 $db_name = "portfolio";
 
 
