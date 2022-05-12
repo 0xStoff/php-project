@@ -144,7 +144,7 @@ function getInpuData(id) {
 
 async function saveImage(form = document.getElementById("projectForm")) {
   try {
-    const response = await fetch("../../data/relation.php", {
+    const response = await fetch("../../php-project/data/relation.php", {
       method: "POST",
       body: new FormData(form),
     });

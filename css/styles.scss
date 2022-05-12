@@ -133,6 +133,21 @@ h3 {
   color: #fff;
 }
 
+// wrapper für card und modals
+.wrapper {
+  animation: fadeIn 0.5s ease-in-out forwards;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  justify-content: center;
+  padding: 3em;
+
+  :nth-child(n) {
+    margin-bottom: 30px;
+  }
+}
+
 .card_image {
   max-width: 100%;
 }
@@ -152,22 +167,19 @@ h3 {
   overflow: hidden;
   width: 600px;
 
-  padding: 2em;
+  // padding: 2em;
 
-  .ImageContainer {
-    min-width: 50%;
-    height: 100%;
+  img {
+    width: 50%;
+    margin: 0 !important;
 
-    img {
-      width: 100%;
-      height: 100%;
-
-    }
+    // height: 100%;
   }
 
   .cardContent {
     min-width: 50%;
-    height: 100%;
+    margin: 0 !important;
+    // height: 100%;
   }
 
   &:hover {
@@ -197,22 +209,6 @@ h3 {
   &_title {
     color: white;
     width: 100%;
-  }
-}
-
-
-// wrapper für card und modals
-.wrapper {
-  animation: fadeIn 0.5s ease-in-out forwards;
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  height: auto;
-  justify-content: center;
-  padding: 3em;
-
-  :nth-child(n) {
-    margin-bottom: 30px;
   }
 }
 

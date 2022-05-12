@@ -14,7 +14,7 @@ function renderCardsHtml(cards, languages) {
     (data, i) =>
       (html += `
               <div class='card' id='card${i}'>
-                  <img style="width:100%" src='../img/${data.picture_path}'/>
+                  <img class="cardImage" src='../img/${data.picture_path}'/>
                 <div class='cardContent'>
                     <h1 class="card_title">${data.title}</h1>
                   <p class="card_title">${data.description}</p>
