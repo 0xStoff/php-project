@@ -14,9 +14,14 @@ function renderCardsHtml(cards, languages) {
     (data, i) =>
       (html += `
               <div class='card' id='card${i}'>
-              <h1 class="card_title">${data.title}</h1>
-              <p class="card_title">${data.description}</p>
-                 ${renderLanguages(data, languages)}
+                <div class='cardImageContainer'>
+                  <img src='img/${data.picture_path}'/>
+                </div>
+                <div class='cardContent'>
+                    <h1 class="card_title">${data.title}</h1>
+                  <p class="card_title">${data.description}</p>
+                  ${renderLanguages(data, languages)}
+                </div>
               </div>
               <div class='icon'>
                   <img data-attribute=${
