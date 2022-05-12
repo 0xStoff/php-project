@@ -40,11 +40,12 @@ const renderForm = (card) => `<div class="formWrapper">
      type="text"
      class="text textInput validity blur"
      id="ProjectNameEdit"
-     name="ProjectNameEdit"
+     name="title"
      value="${card.title}"
      required
    />
    <textarea
+     name="description"
      id="ProjectDescriptionEdit"
      placeholder="Project Description"
      type="text"
@@ -71,6 +72,7 @@ const renderForm = (card) => `<div class="formWrapper">
        onblur="!this.value ? this.style.color='rgba(255, 255, 255, 0.4)': this.style.color='#fff'"
        id="ProjectDateEdit"
        type="date"
+       name="date"
        class="text textDate validity blur"
        required
      />
@@ -81,7 +83,7 @@ const renderForm = (card) => `<div class="formWrapper">
      class="text textImage validity"
      type="file"
      id="img"
-     name="img"
+     name="file"
      accept="image/*"
    />
    <div class="select">

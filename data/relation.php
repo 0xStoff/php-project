@@ -48,17 +48,17 @@ switch ($method) {
             // Valid extensions
             $valid_ext = array("pdf", "doc", "docx", "jpg", "png", "jpeg");
 
-            $response = 0;
             if (in_array($file_extension, $valid_ext)) {
                 // Upload file
                 if (move_uploaded_file($_FILES['file']['tmp_name'], $location)) {
-                    $response = 1;
+                    header("HTTP/1.0 200 OK");
+
+                } else {
+                    header("HTTP/1.0 500 Internal Server Error");
+
                 }
             }
 
-            echo $response;
-            exit;
-            break;
-
         }
+        break;
 }
