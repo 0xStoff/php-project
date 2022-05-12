@@ -64,22 +64,6 @@ async function speichereProject() {
   }
 }
 
-async function saveImage(
-  files = document.getElementById("ProjectImage").files
-) {
-  if (files.length > 0) {
-    let formData = new FormData();
-    formData.append("file", files[0]);
-
-    const response = await fetch("../data/relation.php", {
-      method: "POST",
-      body: formData,
-    });
-
-    console.log(response);
-  }
-}
-
 // Projekt (Karte) aktualisieren
 async function aktualisiereProject(id) {
   // Form validieren
@@ -89,13 +73,12 @@ async function aktualisiereProject(id) {
     const response = await fetch("../data/portfolio.php", {
       method: "PUT",
       headers: {
-        "Content-Type": "multipart/form-data",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify(data),
     });
 
-    if (data.picture_path)
-      saveImage(document.getElementById("ProjectImageEdit").files);
+    if (data.picture_path) saveImage(document.getElementById("modalForm"));
 
     if (response.ok) {
       // Karten laden und zurückgeben
@@ -131,6 +114,10 @@ function getInpuData(id) {
     languageIds = [...languageIds, selectedItems[i].dataset.attribute];
   }
 
+  let files = document.getElementById("ProjectImage").files;
+  let formData = new FormData();
+  formData.append("file", files[0]);
+
   return !id
     ? {
         creation_date: document.getElementById(`ProjectDate`).value,
@@ -153,6 +140,20 @@ function getInpuData(id) {
         projects_id: id,
         url: document.getElementById("ProjectUrlEdit").value,
       };
+}
+
+async function saveImage(form = document.getElementById("projectForm")) {
+  try {
+    const response = await fetch("../data/relation.php", {
+      method: "POST",
+      body: new FormData(form),
+    });
+
+    return response;
+  } catch (error) {
+    console.error(error);
+    showSnackbar("Fehler beim Hochladen des Bildes.");
+  }
 }
 
 export default {
