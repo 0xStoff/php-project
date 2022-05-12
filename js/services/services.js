@@ -36,8 +36,6 @@ async function speichereProject() {
   if (document.forms.ProjectForm.checkValidity()) {
     const data = getInpuData();
 
-    console.log(data);
-
     const response = await fetch("../data/portfolio.php", {
       method: "POST",
       headers: {
@@ -45,6 +43,8 @@ async function speichereProject() {
       },
       body: JSON.stringify(data),
     });
+
+    if (data.picture_path) saveImage();
 
     // Form bei erfolgreicher Speicherung zurücksetzen
     if (response.ok) {
@@ -64,6 +64,22 @@ async function speichereProject() {
   }
 }
 
+async function saveImage(
+  files = document.getElementById("ProjectImage").files
+) {
+  if (files.length > 0) {
+    let formData = new FormData();
+    formData.append("file", files[0]);
+
+    const response = await fetch("../data/relation.php", {
+      method: "POST",
+      body: formData,
+    });
+
+    console.log(response);
+  }
+}
+
 // Projekt (Karte) aktualisieren
 async function aktualisiereProject(id) {
   // Form validieren
@@ -73,12 +89,13 @@ async function aktualisiereProject(id) {
     const response = await fetch("../data/portfolio.php", {
       method: "PUT",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "multipart/form-data",
       },
       body: JSON.stringify(data),
     });
 
-    console.log(response);
+    if (data.picture_path)
+      saveImage(document.getElementById("ProjectImageEdit").files);
 
     if (response.ok) {
       // Karten laden und zurückgeben

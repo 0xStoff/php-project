@@ -34,7 +34,7 @@ function renderCardsHtml(cards, languages) {
 
 // form rendern, welche im Modal angezeigt wird
 const renderForm = (card) => `<div class="formWrapper">
- <form name="ModalForm" class="form">
+ <form id="modalForm" name="ModalForm" class="form">
    <input
      placeholder="Project Title"
      type="text"

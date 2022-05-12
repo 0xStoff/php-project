@@ -95,6 +95,7 @@ switch ($method) {
         break;
 
     case "PUT":
+
         // JSON umwandeln
         $data = json_decode(file_get_contents('php://input'), true);
 
@@ -106,6 +107,7 @@ switch ($method) {
         $creation_date = $data["creation_date"];
         $url = $data["url"];
         $picture_path = $data["picture_path"];
+
         // Daten speichern
         $statement = $pdo->prepare("UPDATE portfolio.projects SET title=?, description=?,creation_date=?,url=?,picture_path=? WHERE projects_id=$projects_id");
 
