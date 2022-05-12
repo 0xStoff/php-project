@@ -144,7 +144,9 @@ h3 {
   cursor: pointer;
   display: flex;
   flex-direction: row;
+
   height: auto;
+  justify-content: space-between;
 
   margin-bottom: 5px;
   overflow: hidden;
@@ -153,7 +155,7 @@ h3 {
   padding: 2em;
 
   .ImageContainer {
-    width: 50%;
+    min-width: 50%;
     height: 100%;
 
     img {
@@ -161,11 +163,11 @@ h3 {
       height: 100%;
 
     }
+  }
 
-    .cardContent {
-      width: 50%;
-      height: 100%;
-    }
+  .cardContent {
+    min-width: 50%;
+    height: 100%;
   }
 
   &:hover {
