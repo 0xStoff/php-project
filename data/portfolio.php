@@ -109,7 +109,7 @@ switch ($method) {
         $picture_path = $data["picture_path"];
 
         // Daten speichern
-        $statement = $pdo->prepare("UPDATE portfolio.projects SET title=?, description=?,creation_date=?,url=?,picture_path=? WHERE projects_id=$projects_id");
+        $statement = $pdo->prepare("UPDATE portfolio.projects SET title=?, description=?,creation_date=?,url=?, picture_path=? WHERE projects_id=$projects_id");
 
         // Relationen zu Languages löschen
         $stat = $pdo->prepare("DELETE FROM portfolio.projects_languages_relation WHERE projects_id = $projects_id");
