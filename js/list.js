@@ -12,16 +12,16 @@ const addToList = (e, selectBox, selectedItems) => {
   // nicht ausführen wenn nur auf box (ohne value) geklickt wird; verhindert leere Zeilen
   // in rechter Liste
   if (e.target.value) {
-    // div Element für List item erstellen
+    // selektiertes Item aus linker Liste entfernen
+    selectBox.removeChild(e.target);
+
+    // div Element für rechtes List item erstellen
     createListElement(
       e.target.dataset.attribute,
       selectBox,
       selectedItems,
       e.target.value
     );
-
-    // selektiertes Item aus linker Liste entfernen
-    selectBox.removeChild(e.target);
   }
 };
 
@@ -74,7 +74,7 @@ function resetLanguagesList(
   languages = allLanguages,
   wrapperElement = document.getElementById("select")
 ) {
-  // document.getElementById("selectedItems").innerHTML = "";
+  document.getElementById("selectedItems").innerHTML = "";
   // durch languages mappen und für jede language ein option element zurückgeben
   let html = "";
   languages.map(
