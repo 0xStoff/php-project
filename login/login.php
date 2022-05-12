@@ -39,7 +39,7 @@ if ($count === 1) {
     session_start();
     $_SESSION['userid'] = $username;
     // weiterleitung zum Dashboard
-    header("Location: /php-project/dashboard/dashboard.php?username=" . $username);
+    header("Location: ../dashboard/dashboard.php?username=" . $username);
 } else {
     // fehlermeldung da kein User mit entsprechender username/passwort kombination gefunden wurde
     echo "

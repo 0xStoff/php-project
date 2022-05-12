@@ -2,20 +2,17 @@
 // konfiguration für datenbank
 $host = "localhost";
 $user = "root";
-$password = '';
+$password = 'abcd1234';
 $db_name = "portfolio";
 
-
-// für Login 
+// für Login
 // Datenbankverbindung mit mysqli aufbauen
 $con = mysqli_connect($host, $user, $password, $db_name);
-
 
 // fehlermeldung bei verbindungsproblem
 if (mysqli_connect_errno()) {
     die("Failed to connect with MySQL: " . mysqli_connect_error());
 }
-
 
 // für api endpoints portfolio und relation
 /// Ausgabe-Mime-Type setzen
