@@ -68,16 +68,6 @@ async function filterProjects(languages, card) {
     language_name: l.language_name,
   }));
 
-  // console.log(
-  //   allLanguages.filter(
-  //     (language) =>
-  //       !selected.find((selected) => {
-  //         selected.language_id === language.language_id &&
-  //           language.language_name === selected.language_name;
-  //       })
-  //   )
-  // );
-
   // unselektierte Languages des Projekts suchen
   const filterUnselected = allLanguages.filter(
     // language übergeben
