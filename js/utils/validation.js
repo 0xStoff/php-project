@@ -1,4 +1,3 @@
-// Snackbar mit übergebenem Parameter (als String) anzeigen
 /**
  *  Blendet eine Snackbar mit übergebener Nachricht für 3 Sekunden lang ein
  *
