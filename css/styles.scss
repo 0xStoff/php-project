@@ -214,11 +214,20 @@ h3 {
 
   &_title {
     color: white;
+    width: 100%;
+    margin-left: 5px;
+  }
+
+  &_desc {
+    color: white;
     width: 85%;
     margin-left: 5px;
   }
 }
 
+option {
+  cursor: pointer;
+}
 // modal komponente
 #modal {
   background-color: #121212;

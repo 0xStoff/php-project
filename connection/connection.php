@@ -1,8 +1,8 @@
 <?php
 // konfiguration für datenbank
-$host = "localhost";
+$host = "127.0.0.1";
 $user = "root";
-$password = '';
+$password = 'abcd1234';
 $db_name = "portfolio";
 
 // für Login

@@ -3,11 +3,14 @@
 // HTML für Cards
 /**
  *
- * @param {*} cards
- * @param {*} languages
- * @returns
+ * @param {Array.<Object>} cards alle Karten resp. Projekte
+ * @param {Array.<Object>} languages Relationen zwischen Languages und Projekten
+ *
+ *
+ *
+ * @returns HTML Wrapper für alle Karten resp. ein Projekte
  */
-function renderCardsHtml(cards, languages) {
+const renderCardsHtml = (cards, languages) => {
   let html = "";
   // mappt durch alle Daten (cards) und gibt ein HTML-Element in Variable "html" zurück
   cards.map(
@@ -17,7 +20,7 @@ function renderCardsHtml(cards, languages) {
                   <img class="cardImage" src='../img/${data.picture_path}'/>
                 <div class='cardContent'>
                     <h1 class="card_title">${data.title}</h1>
-                  <p class="card_title">${data.description}</p>
+                  <p class="card_desc">${data.description}</p>
                   ${renderLanguages(data, languages)}
                 </div>
               </div>
@@ -33,9 +36,15 @@ function renderCardsHtml(cards, languages) {
   );
 
   return html;
-}
+};
 
 // form rendern, welche im Modal angezeigt wird
+/**
+ * Rendern einer Form mit vordefinierten Values, sodass im Editiermodus
+ * die Felder bereits ausgefüllt sind.
+ * @param {Object} card Einzelne Karte resp. Projekt
+ * @returns HTML Wrapper für Form
+ */
 const renderForm = (card) => `<div class="formWrapper">
  <form id="modalForm" name="ModalForm" class="form">
    <input
@@ -101,7 +110,13 @@ const renderForm = (card) => `<div class="formWrapper">
  </form>
 </div>`;
 
-// Languages rendern
+/**
+ * Languages nach Projekt filtern und dementsprechend rendern.
+ *
+ * @param {Array.<Object>} cards alle Karten resp. Projekte
+ * @param {Array.<Object>} languages Relationen zwischen Languages und Projekten
+ * @returns HTML Wrapper für Languages
+ */
 const renderLanguages = (card, languages) => {
   // da alle languages als Relation in der Variable enthalten sind,
   // muss zuerst nach den gewünschten der Karte gefiltert werden
@@ -116,7 +131,12 @@ const renderLanguages = (card, languages) => {
   `;
 };
 
-// rendern eines Modals
+/**
+ *
+ * @param {Object} card Einzelne Karte resp. Projekt
+ * @param {Array.<Object>} languages Relationen zwischen Languages und Projekten
+ * @returns HTML Wrapper für Modalansicht
+ */
 const renderModal = (card, languages) => `<h1>${card.title}</h1>  
 <p class="card_title">vom ${card.creation_date}</p>
 <p class="card_title">${card.description}</p>
