@@ -1,6 +1,9 @@
 import { showSnackbar, validiereInputs } from "../utils/validation.js";
 
-// Projekte (Karten) laden und response als JSON zurückgeben
+/**
+ * Projekte (Karten) laden oder Fehlermeldung in Snackbar
+ * @returns JSON response des GET endpoints für Projekte
+ */
 async function ladeProject() {
   const response = await fetch("../data/portfolio.php");
 
@@ -13,7 +16,10 @@ async function ladeProject() {
   }
 }
 
-// Karte löschen
+/**
+ * Karte löschen oder Fehlermeldung in Snackbar
+ * @param {Int} id id des zu löschenden Objektes
+ */
 async function loescheProject(id) {
   const response = await fetch("../data/portfolio.php?id=" + id, {
     method: "DELETE",
@@ -29,7 +35,11 @@ async function loescheProject(id) {
   }
 }
 
-// neues Projekt (Karte) speichern
+/**
+ *  neues Projekt (Karte) speichern
+ *  Validationsprüfung und Fehlermeldung in Snackbar
+ * @returns  JSON response des GET endpoints für Projekte
+ */
 async function speichereProject() {
   // Form Validation
 
@@ -44,6 +54,7 @@ async function speichereProject() {
       body: JSON.stringify(data),
     });
 
+    // Bild speichern, wenn File gefunden
     if (data.picture_path) saveImage();
 
     // Form bei erfolgreicher Speicherung zurücksetzen
@@ -64,17 +75,37 @@ async function speichereProject() {
   }
 }
 
-// Projekt (Karte) aktualisieren
+/**
+ * Projekt (Karte) aktualisieren
+ *
+ * @param {Int} id  id des Objektes, dessen Datensätze aktualisiert werden müssen
+ * @returns  JSON response des GET endpoints für Projekte
+ */
 async function aktualisiereProject(id) {
+  // Alle Projekte laden
   const { projects } = await ladeProject();
   // Form validieren
   if (document.forms.ModalForm.checkValidity()) {
+    // Values der Inputdaten in Variable data speichern
     const data = getInpuData(id);
 
-    const currentImage = projects.find(
-      (p) => p.projects_id === data.projects_id
-    );
-    if (!data.picture_path) data.picture_path = currentImage.picture_path;
+    // Falls kein neues Bild ausgewählt wurde
+    if (!data.picture_path) {
+      // Erklärung zu dieser Funktion: Input type File kann aus Sicherheitsgründen kein Value tragen,
+      // weshalb im Editiermodus standardmässig kein Bild gewählt ist. Damit das aktuelle
+      // Bild nicht mit einem leeren Datensatz überschrieben wird, falls man es nicht ändern möchte,
+      // müssen wir den aktuellen Pfad aus der Datenbank lesen und neu setzen
+
+      // Suche das aktuelle (geöffnete) Projekt in der Variable projects (alle Projekte)
+      const currentProject = projects.find(
+        (p) => p.projects_id === data.projects_id
+      );
+      // name des aktuellen Bildes in unseres data-Variable schreiben
+      data.picture_path = currentProject.picture_path;
+    } else {
+      // Falls ein neues Bild ausgewählt wurde, wollen wir dieses auf dem Server speichern
+      saveImage(document.getElementById("modalForm"));
+    }
 
     const response = await fetch("../data/portfolio.php", {
       method: "PUT",
@@ -83,8 +114,6 @@ async function aktualisiereProject(id) {
       },
       body: JSON.stringify(data),
     });
-
-    if (data.picture_path) saveImage(document.getElementById("modalForm"));
 
     if (response.ok) {
       // Karten laden und zurückgeben
@@ -100,6 +129,10 @@ async function aktualisiereProject(id) {
   }
 }
 
+/**
+ * Relationen zwischen Languages und Projekten laden
+ * @returns JSON response des GET endpoints für Relationen
+ */
 async function getLanguageRelations() {
   const response = await fetch("../data/relation.php");
 
@@ -112,18 +145,26 @@ async function getLanguageRelations() {
   }
 }
 
+/**
+ *  Daten aus den Inputfeldern ziehen und in ein Objekt verpacken,
+ *  um diese an den Server schicken zu können
+ *
+ * @param {Int} id  id des Objektes
+ * @returns Objekt mit allen Values der Inputfelder
+ */
 function getInpuData(id) {
+  // selektiere Languages in Variable speichern
   const selectedItems = document.getElementsByClassName("listItem");
 
+  // Alle Datenattribute der selektieren Languages in einem Array
+  // namens languagesIds speichern
+  //(da wir jeweils die ID der Language als data-attribute dem HTML ELement übergeben haben)
   let languageIds = [];
   for (let i = 0; i < selectedItems.length; i++) {
     languageIds = [...languageIds, selectedItems[i].dataset.attribute];
   }
 
-  let files = document.getElementById("ProjectImage").files;
-  let formData = new FormData();
-  formData.append("file", files[0]);
-
+  // falls eine ID der funktion übergeben, soll ein anderes Objekt zurückgegeben werden
   return !id
     ? {
         creation_date: document.getElementById(`ProjectDate`).value,
@@ -148,6 +189,11 @@ function getInpuData(id) {
       };
 }
 
+/**
+ * Bild auf dem Server speichern (Endpoint dazu aufrufen)
+ * @param {HTMLElement} form HTML Form, welche das Image-File enthält, dass man hochladen will
+ * @returns Status des Speichervorgangs
+ */
 async function saveImage(form = document.getElementById("projectForm")) {
   try {
     const response = await fetch("../../php-project/data/relation.php", {

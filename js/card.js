@@ -9,7 +9,6 @@ import { addToList, createListElement, resetLanguagesList } from "./list.js";
 import { renderCardsHtml, renderForm, renderModal } from "./render.js";
 import { inputValidation } from "./utils/validation.js";
 
-//XXXXXXXX
 /**
  * Klick auf Karte oder Edit Button verarbeiten
  * Modal dementsprechend anzeigen
@@ -44,7 +43,7 @@ function handleClick(cards, card, languages, id) {
  *
  * @param {Int} id  einzigartige ID, die das Projekt in der DB repräsentiert
  * @param {Object[]} card Karte resp. Projekt, dass im Editiermodus geöffnet werden soll
- * @param {*} languages Relationen zwischen Languages und Projekten
+ * @param {Object[]} languages Relationen zwischen Languages und Projekten
  */
 async function showEditMode(id, cards, card, languages) {
   // validation zu inputfeldern hinzufügen

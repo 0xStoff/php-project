@@ -6,8 +6,6 @@
  * @param {Array.<Object>} cards alle Karten resp. Projekte
  * @param {Array.<Object>} languages Relationen zwischen Languages und Projekten
  *
- *
- *
  * @returns HTML Wrapper für alle Karten resp. ein Projekte
  */
 const renderCardsHtml = (cards, languages) => {

@@ -4,7 +4,12 @@ import apiService from "./services/services.js";
 // alle languages laden
 let { languages: allLanguages } = await apiService.ladeProject();
 
-// Element aus select Liste (links) entfernen und in die rechte Liste einfügen
+/**
+ * Element aus select Liste (links) entfernen und in die rechte Liste einfügen
+ * @param {Event} e event variable des Event Handlers
+ * @param {HTMLElement} selectBox HTML Element der Select Box (zu selektierende Languages)
+ * @param {HTMLElement} selectedItems HTML Element der Liste (selektiere Languages)
+ */
 const addToList = (e, selectBox, selectedItems) => {
   const select = document.getElementById("select");
   select.style.outline = "none";
@@ -25,7 +30,13 @@ const addToList = (e, selectBox, selectedItems) => {
   }
 };
 
-// List element mit Löschen Icon erstellen (wird rechts zur Liste angefügt)
+/**
+ * List element mit Löschen Icon erstellen (wird rechts zur Liste angefügt)
+ * @param {Int} attribute Datenattribut des Targetelements (entspricht der Language-Id)
+ * @param {HTMLElement} selectBox HTML Element der Select Box (zu selektierende Languages)
+ * @param {HTMLElement} selectedItems HTML Element der Liste (selektiere Languages)
+ * @param {Int} value Value des Targetelements
+ */
 function createListElement(attribute, selectBox, selectedItems, value) {
   let listItem = document.createElement("div");
   // klasse für styling hinzufügen
@@ -65,11 +76,17 @@ function createListElement(attribute, selectBox, selectedItems, value) {
   icon.removeEventListener("click", removeFromList);
 }
 
-// Language List zurücksetzen
-// Standardmässig werden alle Languages mit dem wrapper Element des select-tags (auf Startseite) übergeben
-// die Liste wird dabei auf den Anfangswert zurückgesetzt (links aller Inhalt, rechts kein Inhalt)
-// werden der funktion languages übergeben, werden dementsprechend andere optionen angezeigt (notwendig für Editiermodus)
-// da im Modal ein anderes Element wie auf der Startseite zu sehen ist, kann und muss auch der Wrapper übergeben werden
+/**
+ * 
+ * Language List zurücksetzen 
+ * Standardmässig werden alle Languages mit dem wrapper Element des select-tags (auf Startseite) übergeben.
+ * Die Liste wird dabei auf den Anfangswert zurückgesetzt (links aller Inhalt, rechts kein Inhalt).
+ * werden der funktion languages übergeben, werden dementsprechend andere optionen angezeigt 
+ * (notwendig für Editiermodus)
+
+ * @param {Object[]} languages zu ladende Languages
+ * @param {HTMLElement} wrapperElement wrapperElement für die Option-Tags
+ */
 function resetLanguagesList(
   languages = allLanguages,
   wrapperElement = document.getElementById("select")
