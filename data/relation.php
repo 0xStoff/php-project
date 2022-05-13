@@ -51,7 +51,7 @@ switch ($method) {
             if (in_array($file_extension, $valid_ext)) {
                 // Upload file
                 if (move_uploaded_file($_FILES['file']['tmp_name'], $location)) {
-                    header("HTTP/1.0 200 OK");
+                    header("HTTP/1.0 201 UPLOADED");
 
                 } else {
                     header("HTTP/1.0 500 Internal Server Error");
