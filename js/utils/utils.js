@@ -19,6 +19,8 @@ function addEvent(id, func) {
  * Modal mithilfe von CSS-Klassen ein- resp. ausblenden
  *
  * @param {String} fade gibt an, ob das Modal ein- bzw. ausgeblendet werden soll
+ *
+ *  @example fadeModal("in") ODER faderModal("out")
  */
 function fadeModal(fade) {
   const modal = document.getElementById("modal");

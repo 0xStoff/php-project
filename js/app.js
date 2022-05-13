@@ -1,3 +1,20 @@
+// /**
+//  * A song
+//  * @typedef {Object} Card
+//  * @property {string} title - The title
+//  * @property {string} artist - The artist
+//  * @property {number} year - The year
+//  */
+
+// /**
+//  * @type {number}
+//  */
+// var FOO = 1;
+// /**
+//  * @const {number}
+//  */
+// const FOOC = 1;
+
 // apiService importieren
 import apiService from "./services/services.js";
 // funktion (logik) für das rendern der Cards (Projekte) importieren
@@ -58,3 +75,19 @@ addEvent("FormularZuruecksetzen", () => {
 
 // on blur validation zu inputs hinzfügen
 inputValidation();
+
+// Lexical this
+var bob = {
+  _name: "Bob",
+  _friends: ["alice"],
+  printFriends() {
+    this._friends.forEach((f) => console.log(this._name + " knows " + f));
+  },
+  printFriends2() {
+    // function
+
+    this._friends.forEach((f) => console.log(this._name + " knows " + f));
+  },
+};
+
+bob.printFriends();
