@@ -156,6 +156,5 @@ Beim Klicken auf eine Card öffnet sich ein Pop-up Window. Der Mülleimer ist f�
 
 # Links
 
-[ICT Semesterprojekt Dokumentation auf Notion](https://www.notion.so/ICT-Semesterprojekt-Dokumentation-auf-Notion-0aba74f3e7bf48c4b4047b579753622a)
 
 [GitHub - 0xStoff/php-project](https://github.com/0xStoff/php-project)
