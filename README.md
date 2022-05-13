@@ -1,4 +1,4 @@
-# ICT Semesterprojekt Dokumentation auf Notion
+# ICT Semesterprojekt 
 
 # Auswahl Projekt Thema
 
