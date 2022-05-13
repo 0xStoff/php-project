@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: list.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: list.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// apiService importieren
+import apiService from "./services/services.js";
+
+// alle languages laden
+let { languages: allLanguages } = await apiService.ladeProject();
+
+/**
+ * Element aus select Liste (links) entfernen und in die rechte Liste einfügen
+ * @param {Event} e event variable des Event Handlers
+ * @param {HTMLElement} selectBox HTML Element der Select Box (zu selektierende Languages)
+ * @param {HTMLElement} selectedItems HTML Element der Liste (selektiere Languages)
+ */
+const addToList = (e, selectBox, selectedItems) => {
+  const select = document.getElementById("select");
+  select.style.outline = "none";
+
+  // nicht ausführen wenn nur auf box (ohne value) geklickt wird; verhindert leere Zeilen
+  // in rechter Liste
+  if (e.target.value) {
+    // selektiertes Item aus linker Liste entfernen
+    selectBox.removeChild(e.target);
+
+    // div Element für rechtes List item erstellen
+    createListElement(
+      e.target.dataset.attribute,
+      selectBox,
+      selectedItems,
+      e.target.value
+    );
+  }
+};
+
+/**
+ * List element mit Löschen Icon erstellen (wird rechts zur Liste angefügt)
+ * @param {Int} attribute Datenattribut des Targetelements (entspricht der Language-Id)
+ * @param {HTMLElement} selectBox HTML Element der Select Box (zu selektierende Languages)
+ * @param {HTMLElement} selectedItems HTML Element der Liste (selektiere Languages)
+ * @param {Int} value Value des Targetelements
+ */
+function createListElement(attribute, selectBox, selectedItems, value) {
+  let listItem = document.createElement("div");
+  // klasse für styling hinzufügen
+  listItem.classList.add("listItem");
+  // selektiertes Item als child hinzufügen
+  listItem.appendChild(document.createTextNode(`${value}`));
+  // value auf selektiertes Item setzen
+  listItem.dataset.attribute = attribute;
+  listItem.value = value;
+
+  // img Element für Icon erstellen (Close Icon)
+  let icon = document.createElement("img");
+  // styling und src (url)
+  icon.classList.add("iconList");
+  icon.src = "./assets/close.svg";
+
+  // icon zu ListItem hinzufügen
+  listItem.appendChild(icon);
+
+  // listItem zu selectedItems (rechte Liste) hinzufügen
+  selectedItems.appendChild(listItem);
+
+  // Element aus rechter Liste wieder entfernen und links wieder einfügen
+  const removeFromList = () => {
+    // option element erstellen
+    let option = document.createElement("option");
+    // text auf den div Wert setzen, den es zu entfernen gilt
+    option.text = listItem.value;
+    // option in linke Liste wieder einfügen
+    selectBox.add(option);
+    // kind aus rechter Liste wieder entfernen
+    selectedItems.removeChild(listItem);
+  };
+
+  // Event Listener für entfernen Icon hinzufügen und wieder entfernen nach dem löschen
+  icon.addEventListener("click", () => removeFromList());
+  icon.removeEventListener("click", removeFromList);
+}
+
+/**
+ * 
+ * Language List zurücksetzen 
+ * Standardmässig werden alle Languages mit dem wrapper Element des select-tags (auf Startseite) übergeben.
+ * Die Liste wird dabei auf den Anfangswert zurückgesetzt (links aller Inhalt, rechts kein Inhalt).
+ * werden der funktion languages übergeben, werden dementsprechend andere optionen angezeigt 
+ * (notwendig für Editiermodus)
+
+ * @param {Object[]} languages zu ladende Languages
+ * @param {HTMLElement} wrapperElement wrapperElement für die Option-Tags
+ */
+function resetLanguagesList(
+  languages = allLanguages,
+  wrapperElement = document.getElementById("select")
+) {
+  document.getElementById("selectedItems").innerHTML = "";
+  // durch languages mappen und für jede language ein option element zurückgeben
+  let html = "";
+  languages.map(
+    (language, i) =>
+      (html += `
+      &lt;option value="${language.language_name}" data-attribute=${language.language_id}>${language.language_name}&lt;/option>
+          `)
+  );
+  // html einfügen, falls ein wrapper element vorhanden ist
+  if (wrapperElement) wrapperElement.innerHTML = html;
+}
+
+export { addToList, createListElement, resetLanguagesList };
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addEvent">addEvent</a></li><li><a href="global.html#addToList">addToList</a></li><li><a href="global.html#aktualisiereProject">aktualisiereProject</a></li><li><a href="global.html#createListElement">createListElement</a></li><li><a href="global.html#deleteCard">deleteCard</a></li><li><a href="global.html#fadeModal">fadeModal</a></li><li><a href="global.html#filterProjects">filterProjects</a></li><li><a href="global.html#getInpuData">getInpuData</a></li><li><a href="global.html#getLanguageRelations">getLanguageRelations</a></li><li><a href="global.html#handleClick">handleClick</a></li><li><a href="global.html#inputValidation">inputValidation</a></li><li><a href="global.html#ladeProject">ladeProject</a></li><li><a href="global.html#loescheProject">loescheProject</a></li><li><a href="global.html#openTab">openTab</a></li><li><a href="global.html#renderCards">renderCards</a></li><li><a href="global.html#renderCardsHtml">renderCardsHtml</a></li><li><a href="global.html#renderForm">renderForm</a></li><li><a href="global.html#renderLanguages">renderLanguages</a></li><li><a href="global.html#renderModal">renderModal</a></li><li><a href="global.html#resetLanguagesList">resetLanguagesList</a></li><li><a href="global.html#saveImage">saveImage</a></li><li><a href="global.html#showEditMode">showEditMode</a></li><li><a href="global.html#showSnackbar">showSnackbar</a></li><li><a href="global.html#speichereProject">speichereProject</a></li><li><a href="global.html#validiereInputs">validiereInputs</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Fri May 13 2022 17:41:29 GMT+0200 (Central European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

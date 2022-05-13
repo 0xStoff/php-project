@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: render.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: render.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>// In diesem Modul ist wenig Logik, es wird vor allem HTML von den Funktionen zurückgegeben
+
+// HTML für Cards
+/**
+ *
+ * @param {Array.&lt;Object>} cards alle Karten resp. Projekte
+ * @param {Array.&lt;Object>} languages Relationen zwischen Languages und Projekten
+ *
+ * @returns HTML Wrapper für alle Karten resp. ein Projekte
+ */
+const renderCardsHtml = (cards, languages) => {
+  let html = "";
+  // mappt durch alle Daten (cards) und gibt ein HTML-Element in Variable "html" zurück
+  cards.map(
+    (data, i) =>
+      (html += `
+              &lt;div class='card' id='card${i}'>
+                  &lt;img class="cardImage" src='../img/${data.picture_path}'/>
+                &lt;div class='cardContent'>
+                    &lt;h1 class="card_title">${data.title}&lt;/h1>
+                  &lt;p class="card_desc">${data.description}&lt;/p>
+                  ${renderLanguages(data, languages)}
+                &lt;/div>
+              &lt;/div>
+              &lt;div class='icon'>
+                  &lt;img data-attribute=${
+                    data.projects_id
+                  } id='delete${i}' src=./assets/delete.svg class='iconDelete' />
+                   &lt;img  data-attribute=${
+                     data.projects_id
+                   } id='edit${i}' src='./assets/edit.svg' class='iconEdit'/>
+              &lt;/div>
+              `)
+  );
+
+  return html;
+};
+
+// form rendern, welche im Modal angezeigt wird
+/**
+ * Rendern einer Form mit vordefinierten Values, sodass im Editiermodus
+ * die Felder bereits ausgefüllt sind.
+ * @param {Object} card Einzelne Karte resp. Projekt
+ * @returns HTML Wrapper für Form
+ */
+const renderForm = (card) => `&lt;div class="formWrapper">
+ &lt;form id="modalForm" name="ModalForm" class="form">
+   &lt;input
+     placeholder="Project Title"
+     type="text"
+     class="text textInput validity blur"
+     id="ProjectNameEdit"
+     name="title"
+     value="${card.title}"
+     required
+   />
+   &lt;textarea
+     name="description"
+     id="ProjectDescriptionEdit"
+     placeholder="Project Description"
+     type="text"
+     class="text textArea validity blur"
+     required
+   >${card.description}&lt;/textarea>
+   &lt;div class="inputWrapper">
+     &lt;input
+     value=${card.url}
+       id="ProjectUrlEdit"
+       type="url"
+       name="url"
+       id="url"
+       placeholder="https://github.com/project-name"
+       pattern="https://.*"
+       size="30"
+       class="text textUrl validity blur"
+       required
+     />
+     &lt;input
+        value=${card.creation_date}
+        style="color:white"
+       onfocus="!this.value ? this.style.color='rgba(255, 255, 255, 0.4)': this.style.color='#fff'"
+       onblur="!this.value ? this.style.color='rgba(255, 255, 255, 0.4)': this.style.color='#fff'"
+       id="ProjectDateEdit"
+       type="date"
+       name="date"
+       class="text textDate validity blur"
+       required
+     />
+   &lt;/div>
+   &lt;input
+     onblur="this.checkValidity() &amp;&amp; (this.style.outline='none')"
+     id="ProjectImageEdit"
+     class="text textImage validity"
+     type="file"
+     id="img"
+     name="file"
+     accept="image/*"
+   />
+   &lt;div class="select">
+   &lt;select id="select1" class="selectField" multiple>
+    &lt;/select>
+    &lt;div id="selectedItems1" class="selectSelected">
+    &lt;/div>
+    &lt;/div>
+   &lt;button class="button" type="button" id="ButtonAktualisieren">
+   Update
+   &lt;/button>
+ &lt;/form>
+&lt;/div>`;
+
+/**
+ * Languages nach Projekt filtern und dementsprechend rendern.
+ *
+ * @param {Array.&lt;Object>} cards alle Karten resp. Projekte
+ * @param {Array.&lt;Object>} languages Relationen zwischen Languages und Projekten
+ * @returns HTML Wrapper für Languages
+ */
+const renderLanguages = (card, languages) => {
+  // da alle languages als Relation in der Variable enthalten sind,
+  // muss zuerst nach den gewünschten der Karte gefiltert werden
+  const filter = languages.filter((l) => l.projects_id === card.projects_id);
+
+  // html zurückgeben
+  // durch die languages muss nochmals gemappt werden, da es ein Array ist
+  return `
+    &lt;h3 class="card_languages">
+      ${filter.map((l) => " " + l.language_name)}
+    &lt;/h3>
+  `;
+};
+
+/**
+ *
+ * @param {Object} card Einzelne Karte resp. Projekt
+ * @param {Array.&lt;Object>} languages Relationen zwischen Languages und Projekten
+ * @returns HTML Wrapper für Modalansicht
+ */
+const renderModal = (card, languages) => `&lt;h1>${card.title}&lt;/h1>  
+&lt;p class="card_title">vom ${card.creation_date}&lt;/p>
+&lt;p class="card_title">${card.description}&lt;/p>
+&lt;img class="card_image" src="../img/${card.picture_path}" />&lt;/br>
+&lt;a href="${card.url}" class="card_title">${card.url}&lt;/a> 
+${renderLanguages(card, languages)}`;
+
+export { renderCardsHtml, renderForm, renderModal };
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#addEvent">addEvent</a></li><li><a href="global.html#addToList">addToList</a></li><li><a href="global.html#aktualisiereProject">aktualisiereProject</a></li><li><a href="global.html#createListElement">createListElement</a></li><li><a href="global.html#deleteCard">deleteCard</a></li><li><a href="global.html#fadeModal">fadeModal</a></li><li><a href="global.html#filterProjects">filterProjects</a></li><li><a href="global.html#getInpuData">getInpuData</a></li><li><a href="global.html#getLanguageRelations">getLanguageRelations</a></li><li><a href="global.html#handleClick">handleClick</a></li><li><a href="global.html#inputValidation">inputValidation</a></li><li><a href="global.html#ladeProject">ladeProject</a></li><li><a href="global.html#loescheProject">loescheProject</a></li><li><a href="global.html#openTab">openTab</a></li><li><a href="global.html#renderCards">renderCards</a></li><li><a href="global.html#renderCardsHtml">renderCardsHtml</a></li><li><a href="global.html#renderForm">renderForm</a></li><li><a href="global.html#renderLanguages">renderLanguages</a></li><li><a href="global.html#renderModal">renderModal</a></li><li><a href="global.html#resetLanguagesList">resetLanguagesList</a></li><li><a href="global.html#saveImage">saveImage</a></li><li><a href="global.html#showEditMode">showEditMode</a></li><li><a href="global.html#showSnackbar">showSnackbar</a></li><li><a href="global.html#speichereProject">speichereProject</a></li><li><a href="global.html#validiereInputs">validiereInputs</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.10</a> on Fri May 13 2022 17:41:29 GMT+0200 (Central European Summer Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
