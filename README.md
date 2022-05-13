@@ -6,7 +6,7 @@ In letzter Zeit nutzen wir durch die Aufstockung von Mitarbeitern im Geschäft u
 
 # ER-Model
 
-![Untitled](ICT%20Semesterprojekt%20Dokumentation%20auf%20Notion%20d55e886fa9774f25bd11b79fa4d9b18b/Untitled.png)
+![Untitled](https://user-images.githubusercontent.com/67320949/168331979-a2357462-a580-4281-9dcc-8a2ba7a1533a.png)
 
 # SQL
 
