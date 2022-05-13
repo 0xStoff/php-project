@@ -1,6 +1,5 @@
 import { addEvent } from "./utils/utils.js";
 
-// Tab wechseln (zwischen Login und Register)
 /**
  * Tabs zwischen Login und Register wechseln.
  * Die Funktion könnte um beliebig viele Tabs erweitert werden

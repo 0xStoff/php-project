@@ -8,7 +8,7 @@ $method = $_SERVER['REQUEST_METHOD'];
 
 // Aufrufe abhandeln
 switch ($method) {
-
+    // Relationen zwischen Projekten und Languages
     case "GET":
         // Header setzen
         header("HTTP/1.0 200 OK");
@@ -31,7 +31,7 @@ switch ($method) {
         // Methode nicht erlaubt
         header("HTTP/1.0 405 Not Allowed");
 
-    // Neues Projekt erstellen
+    // Neues Image-File auf dem Server speichern
     case "POST":
 
         if (isset($_FILES['file']['name'])) {
