@@ -1,18 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Document</title>
-    <link href="../css/styles.css" rel="stylesheet" />
-
-</head>
-
-<body>
-    <?php
+<?php
 // DB-konfiguration laden
 include '../connection/connection.php';
 
@@ -27,8 +13,8 @@ $sql = "INSERT INTO  Users(username,password) VALUES ('$username','$password')";
 if ($con->query($sql) === true) {
     // registrierung erfolgreich
     echo "
-   <h1> Registrierung erfolgreich. Gehe zurück um dich einzuloggen. </h1>
-       <button onclick='history.back()' class='button'>Zurück</button>
+    Registrierung erfolgreich. Gehe zurück um dich einzuloggen.
+
 ";
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
@@ -36,7 +22,3 @@ if ($con->query($sql) === true) {
 
 // datenbankverbindung schliessen
 $con->close();
-?>
-</body>
-
-</html>
