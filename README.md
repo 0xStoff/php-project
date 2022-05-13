@@ -30,9 +30,10 @@ Zwischentabelle, die eine Relation zwischen projects und languages darstellt (Ma
 
 # Ordner und File Struktur
 
-![Untitled](ICT%20Semesterprojekt%20Dokumentation%20auf%20Notion%20d55e886fa9774f25bd11b79fa4d9b18b/Untitled%201.png)
+![ordner](https://user-images.githubusercontent.com/67320949/168332302-3354e1cc-982b-43ce-8793-919fd2cca357.png)
 
-![Untitled](ICT%20Semesterprojekt%20Dokumentation%20auf%20Notion%20d55e886fa9774f25bd11b79fa4d9b18b/Untitled%202.png)
+![file](https://user-images.githubusercontent.com/67320949/168332346-cdc0be48-2b2d-4da1-913e-ba824168a35f.png)
+
 
 ## PHP
 
